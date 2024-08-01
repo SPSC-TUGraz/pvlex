@@ -448,6 +448,26 @@ def rule_clusters(rule):
         result = 'schwa_deletion'
     return result
 
+def grasslang2g2plang(g2plangs: dict, lang: str) -> str:
+    """
+    Convert name of language code to its g2p representation.
+    """
+        # {"DE": "deu",
+        #         "DG": "deu",
+        #         "EN": "eng",
+        #         "HR": "hun",
+        #         "FR": "fra-FR",
+        #         "IT": "ita",
+        #         "JA": "jpn-JP",
+        #         "PT": "spa-ES",
+        #         "ES": "spa-ES",
+        #         "SV": "swe-SE",
+        #         "L": "deu",
+        #         "DI": "deu",
+        #         "DEN": "deu",
+        #         }
+    return g2plangs[lang];
+
 def count_rules(rules):
     """ by xenia """
     deletions = ['deletion', 'delition']

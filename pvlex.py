@@ -9,36 +9,16 @@ from utils.lexicon_utils import *
 import re
 
 
-def grasslang2g2plang(cfg: dict, lang: str) -> str:
-    """
-    Convert name of language code to its g2p representation.
-    """
-
-    g2plangs = cfg["PronunciationSettings"]["LanguageTagsG2P"]
-        # {"DE": "deu",
-        #         "DG": "deu",
-        #         "EN": "eng",
-        #         "HR": "hun",
-        #         "FR": "fra-FR",
-        #         "IT": "ita",
-        #         "JA": "jpn-JP",
-        #         "PT": "spa-ES",
-        #         "ES": "spa-ES",
-        #         "SV": "swe-SE",
-        #         "L": "deu",
-        #         "DI": "deu",
-        #         "DEN": "deu",
-        #         }
-    return g2plangs[lang];
-
-
 def generate_PV_lexicon(inputLexName, fPath, config={}, wantPVs=True) -> (dict, str):
     """
-    Take (GRASS) canonical lexicon and *optionally* ...
-    - create pronunciation variants (PVs),
-    - append additional lexicons,
-    - append lexicons of other corpora with/without PVs,
+    Take (GRASS) wordlist and create pronunciation lexicon with:
+    - canonical pronunciations
+    and optionally:
+    - pronunciation variants (PVs),
+    - appending additional lexicons,
+    - appending lexicons of other corpora with/without PVs,
     - reduce phone set
+    - create Part-of-Speech (PoS) tags
     ... as defined in the config file.
     """
 
@@ -61,30 +41,34 @@ def generate_PV_lexicon(inputLexName, fPath, config={}, wantPVs=True) -> (dict, 
                                     f"I tried to open {'/'.join([genpath, configname])}");
 
     want2genPVs = config["GeneralSettings"]["want2GenPVs"];
-    inputLexNameExt = inputLexName
-    inputLexName = strip_file_extension(inputLexName);
 
     # read in raw lexicon, if any
-    try:
-        lines = open('/'.join([fPath, inputLexNameExt]), 'r', encoding='utf-8').readlines()
-        lexiconRaw = {};
-        for line in lines:
-            [key, val] = line.strip().split(r'{}'.format('\t'));
-            lexiconRaw.update({key: val});
-    except FileNotFoundError:
-        print(f"[WARNING] Could not find raw lexicon (file {inputLexName}) in {fPath}.\n"
-              f"I'll create it from your wordlist.")
+    if config["GeneralSettings"]["updateLexicon"] is False:
         try:
-            fName = "wordlistDEU.txt"
-            lines = open('/'.join([fPath, fName]), 'r', encoding='utf-8').readlines()
+            lines = open('/'.join([fPath, inputLexName]), 'r', encoding='utf-8').readlines()
+            lexiconRaw = {};
+            for line in lines:
+                [key, val] = line.strip().split(r'{}'.format('\t'));
+                lexiconRaw.update({key: val});
+            inputLexName = strip_file_extension(inputLexName)
         except FileNotFoundError:
-            raise FileNotFoundError(f"Could not find German wordlist (file {fName}) in {fPath}.\n"
+            print(f"[WARNING] Could not find raw lexicon (file {inputLexName}) in {fPath}.\n"
+                  f"I'll create it from your wordlist.")
+
+    else:
+        # no lexicon found or should be updated, load wordlist and send to g2p for getting canonical pronunciations
+        try:
+            wordlistNName = config["WordListName"]
+            wordList = open('/'.join([fPath, wordlistNName]), 'r', encoding='utf-8').readlines()
+        except FileNotFoundError:
+            raise FileNotFoundError(f"Could not find German wordlist (file {wordlistNName}) in {fPath}.\n"
                                     f"There's nothing I can do for you.")
         parser = g2p.parser;
-        print(os.path.join(config["BasePath"], fName))
-        args = parser.parse_args([os.path.join(fPath, fName), '--iform=txt', '--oform=tab',
-                                  '--stress=yes', '--syl=yes', f"--lng=deu"])
-        print(f"... using g2p for {fName} ...")
+        print(os.path.join(config["BasePath"], wordlistNName))
+        mainLanguage = grasslang2g2plang(cfg["GeneralSettings"]["PronunciationSettings"]["LanguageTagsG2P"], config["MainLanguage"])
+        args = parser.parse_args([os.path.join(fPath, wordlistNName), '--iform=txt', '--oform=tab',
+                                  '--stress=yes', '--syl=yes', f"--lng={mainLanguage}"])
+        print(f"... using g2p for {mainLanguage} ({len(wordList)} words) ...")
         g2pOutput = g2p.process(args);
         g2pOutputCrazy = g2pOutput.split('\n');
         with open(f"{fPath}/{inputLexName}.txt", 'w', encoding='utf-8') as f:
@@ -100,22 +84,22 @@ def generate_PV_lexicon(inputLexName, fPath, config={}, wantPVs=True) -> (dict, 
         lexiconRaw = {};
         lexiconRaw.update(lexTmp);
 
-    loadPath = os.path.join(fPath, "SpecialLexicons");
-    for lexName in config["GeneralSettings"]["overwritePronunciations"].keys():
-        if bool(config["GeneralSettings"]["overwritePronunciations"][lexName]["want2do"]) is True:
-            fNameManCorr = config["GeneralSettings"]["overwritePronunciations"][lexName]["lexName"]
-            try:
-                correctedLines = open(os.path.join(loadPath, fNameManCorr), 'r',
-                                      encoding='utf-8').read().splitlines();
-                corrLines = {};
-                for lin in correctedLines:
-                    corrLines.update({lin.split('\t')[0]: lin.split('\t')[1]})
-                for key, val in lexiconRaw.items():
-                    if key in corrLines:
-                        lexiconRaw.update({key: corrLines[key]});
-            except FileNotFoundError:
-                print(f"You wanted to {lexName} pronunciation with manual corrections but no file with\n"
-                                  f"these corrections could be found ({fNameManCorr}).\nI'll discard that step.")
+        loadPath = os.path.join(fPath, "SpecialLexicons");
+        for lexName in config["GeneralSettings"]["overwritePronunciations"].keys():
+            if bool(config["GeneralSettings"]["overwritePronunciations"][lexName]["want2do"]) is True:
+                fNameManCorr = config["GeneralSettings"]["overwritePronunciations"][lexName]["lexName"]
+                try:
+                    correctedLines = open(os.path.join(loadPath, fNameManCorr), 'r',
+                                          encoding='utf-8').read().splitlines();
+                    corrLines = {};
+                    for lin in correctedLines:
+                        corrLines.update({lin.split('\t')[0]: lin.split('\t')[1]})
+                    for key, val in lexiconRaw.items():
+                        if key in corrLines:
+                            lexiconRaw.update({key: corrLines[key]});
+                except FileNotFoundError:
+                    print(f"You wanted to {lexName} pronunciation with manual corrections but no file with\n"
+                                      f"these corrections could be found ({fNameManCorr}).\nI'll discard that step.")
 
     # write homophone lexicon at this stage
     lexHomophonesOnly = get_homophones(lexiconRaw);
@@ -134,7 +118,7 @@ def generate_PV_lexicon(inputLexName, fPath, config={}, wantPVs=True) -> (dict, 
     PVGen.write_rule_count();
     PVGen.lexiconPVs = PVGen.sort_by_keys()
     # PVGen.lexiconPVs = PVGen.remove_duplicates_from_lexicon(PVGen.lexiconPVs);
-    PVGen.write_lexicon(nameExtension="_GermanOnly", case=config["GeneralSettings"]["case"]);
+    # PVGen.write_lexicon(nameExtension="_GermanOnly", case=config["GeneralSettings"]["case"]);
 
     # create a fesh copy of the current lexicon, then add others
     lexiconNew = copy.deepcopy(PVGen.lexiconPVs);

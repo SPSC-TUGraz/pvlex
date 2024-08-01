@@ -1,12 +1,16 @@
 { // input path where wordlists are stored and where files will be saved
   "BasePath": "C:/Users/kia/Documents/uni/TUGraz/oWork/1Projects/StateOfStudyFair/pvlexicon/data/wordlists", // if empty, cwd
-//  "RawGermanLexicon": "lexiconGRASSGermanRaw.txt", // name of the raw input lexicon which contains German words only
+  "WordListName": "wordlistDEU.txt", // name of wordlist
+  "MainLanguage": "DE", // 2do: make used somewhere: it should be possible to set the main corpus language to sth else
+  //  "RawGermanLexicon": "lexiconGRASSGermanRaw.txt", // name of the raw input lexicon which contains German words only
   "RawGermanLexicon": "lexiconDEURaw.txt", // name of the raw input lexicon which will contain German words only
+
   "OriginalLexiconName": "lexicon_SF.txt", // name of the original corpus lexicon
 //  "OriginalLexiconName": "lexicon_GRASS.txt", // name of the original corpus lexicon
 //  "OriginalLexiconName": "lexicon_GRASS.txt", // name of the original corpus lexicon
   "FinalLexiconName": "lexiconLatest.txt", // name of the output lexicon
   "GeneralSettings": {
+    "updateLexicon": true, // if true, existing lexicons will be ignored/overwritten and the wordlist will be used
     "want2GenPVs": 1, // 1: apply rules, 0: don't apply rules
     "ruleSets": { // you can switch on/off whole groups of rules here; individual rules are defined below
       "InputSwitchGG2AG": 1,
@@ -26,7 +30,6 @@
       }
     },
     "PronunciationSettings": {
-      "MainLanguage": "DE", // 2do: make used somewhere: it should be possible to set the main corpus language to sth else
       "LanguageTagsG2P": {
         "DE": "deu",
         "DI": "deu", // Dialect
