@@ -486,16 +486,16 @@ def check_and_prepare_wordlist(fPath: str, wlName: str) -> int:
                                 f"There's nothing I can do for you.")
     return len(wordListNew);
 
-def overwrite_pronunciations(cfg, fPath, lex):
+def overwrite_pronunciations(config, fPath, lex):
     """
     Overwrite specific pronunciations (as defined in the special lexicons).
     Why?
     - Non-existing-on-the-fly-created words (often Denglish) might have a wrong pronunciation.
     - There are a couple of systematic errors in the g2p output.
     """
-    for lexName in cfg["GeneralSettings"]["overwritePronunciations"].keys():
-        if cfg["GeneralSettings"]["overwritePronunciations"][lexName]["want2do"] is True:
-            fNameManCorr = cfg["GeneralSettings"]["overwritePronunciations"][lexName]["lexName"]
+    for lexName in config["GeneralSettings"]["overwritePronunciations"]["LexNames"].keys():
+        if config["GeneralSettings"]["overwritePronunciations"]["LexNames"][lexName]["want2do"] is True:
+            fNameManCorr = config["GeneralSettings"]["overwritePronunciations"]["LexNames"][lexName]["lexName"]
             try:
                 correctedLines = open(os.path.join(fPath, fNameManCorr), 'r',
                                       encoding='utf-8').read().splitlines();

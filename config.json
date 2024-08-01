@@ -4,7 +4,6 @@
   "MainLanguage": "DE", // 2do: make used somewhere: it should be possible to set the main corpus language to sth else
   //  "RawGermanLexicon": "lexiconGRASSGermanRaw.txt", // name of the raw input lexicon which contains German words only
   "RawGermanLexicon": "lexiconDEURaw.txt", // name of the raw input lexicon which will contain German words only
-
   "OriginalLexiconName": "lexicon_SF.txt", // name of the original corpus lexicon
 //  "OriginalLexiconName": "lexicon_GRASS.txt", // name of the original corpus lexicon
 //  "OriginalLexiconName": "lexicon_GRASS.txt", // name of the original corpus lexicon
@@ -21,14 +20,17 @@
 
     "overwritePronunciations": {
       "want2do": true, // do you want to do *any* of the changes defined here? (specify which ones in subsections)
-      "overwriteG2Perrors": { // some generated canonical pronunciations are wrong
-        "want2do": tru, // overwrite with manual lexicon
-        "lexName": "__ManualG2PCorrections.txt" // name of this manual lexicon
+      "LexNames": {
+        "overwriteG2Perrors": { // some generated canonical pronunciations are wrong
+          "want2do": true, // overwrite with manual lexicon
+          "lexName": "__ManualG2PCorrections.txt" // name of this manual lexicon
+        },
+        "overwriteDenglisch": {
+          "want2do": true,
+          "lexName": "__DenglishWords.txt"
+        }
       },
-      "overwriteDenglisch": {
-        "want2do": true,
-        "lexName": "__DenglishWords.txt"
-      }
+
     },
     "PronunciationSettings": {
       "LanguageTagsG2P": {

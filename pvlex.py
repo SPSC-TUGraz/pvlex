@@ -75,9 +75,8 @@ def generate_PV_lexicon(inputLexName, fPath, config={}, wantPVs=True) -> (dict, 
     # overwrite some wrong g2p pronunciations
     if config["GeneralSettings"]["overwritePronunciations"]["want2do"] is True:
         loadPath = '/'.join([fPath, "SpecialLexicons"]);
-        lexiconRaw = overwrite_pronunciations(loadPath, lexiconRaw)
+        lexiconRaw = overwrite_pronunciations(config=config, fPath=loadPath, lex=lexiconRaw)
 
-    # 2do: HIER
     # write homophone lexicon at this stage
     lexHomophonesOnly = get_homophones(lexiconRaw);
     write_homophone_lexicon(lexHomophonesOnly, inputLexName, fPath, nameExtension="Original");
@@ -86,6 +85,7 @@ def generate_PV_lexicon(inputLexName, fPath, config={}, wantPVs=True) -> (dict, 
     ruleSets = config["GeneralSettings"]["ruleSets"]
     rules = init_PV_rules(config['PronunciationVariation'], want2genPVs, ruleSets);
 
+    # 2do: HIER
     # initialise PV generator
     PVGen = PronVarGenerator(lexName=strip_file_extension(config["OriginalLexiconName"]), rules=rules);
     PVGen.lexPath = fPath;
