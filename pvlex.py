@@ -3,7 +3,6 @@ import os
 import json5 as json
 import numpy as np
 from utils.NewPronVarGenerator import PronVarGenerator
-# from NewPronVarGenerator import sort_dict_by_key
 from g2p import g2p
 import pandas as pd
 from utils.lexicon_utils import *
@@ -133,7 +132,7 @@ def generate_lexicon(inputLexName, fPath, config={}, wantPVs=True) -> (dict, str
     # generate pronunciation variants
     PVGen.gen_pron_vars(lexiconRaw);
     PVGen.write_rule_count();
-    PVGen.lexiconPVs = sort_pron_dict_by_key(PVGen.lexiconPVs)
+    PVGen.lexiconPVs = PVGen.sort_by_keys()
     # PVGen.lexiconPVs = PVGen.remove_duplicates_from_lexicon(PVGen.lexiconPVs);
     PVGen.write_lexicon(nameExtension="_GermanOnly", case=config["GeneralSettings"]["case"]);
 
@@ -248,7 +247,7 @@ def generate_lexicon(inputLexName, fPath, config={}, wantPVs=True) -> (dict, str
         lexiconNew = reduce_phone_set(lexiconNew, phonesToBeMerged);
 
     # sort dict before writing
-    sort_any_dict_by_key(lexiconNew);
+    sort_regular_dict_by_key(lexiconNew);
     # write to file
     lexName = strip_file_extension(config["FinalLexiconName"]);
     write_lexicon(lexiconNew, lexName, fPath, case="lower")

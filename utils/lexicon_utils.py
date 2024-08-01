@@ -20,7 +20,7 @@ def strip_file_extension(string):
     """
     return os.path.splitext(string)[0];
 
-def sort_any_dict_by_key(unsortedDict) -> None:
+def sort_regular_dict_by_key(unsortedDict) -> None:
     """
     This method sorts a dictionary alphabetically by keys.
 
@@ -35,17 +35,6 @@ def sort_any_dict_by_key(unsortedDict) -> None:
     """
 
     return dict(OrderedDict(sorted(unsortedDict.items())));
-
-def sort_pron_dict_by_key(unsortedDict) -> dict:
-    """
-    Sort a Python dict by key.
-    Parameter:
-        unsortedDict: dict
-    Returns:
-        dict
-    """
-    sortedDict = OrderedDict(sorted(unsortedDict.items()))
-    return sortedDict;
 
 def nested_dict_pairs_iterator(dict_obj):
     """
@@ -214,7 +203,7 @@ def merge_lexicons(lexiconOld: dict, lexiconNew: dict, lexiconNewName: str, lexi
         print(r'[merge_lexicons]' + " Should not see this! Items left in lexicon after merging!")
 
     if sort is True:
-        sort_any_dict_by_key(lexiconOut);
+        sort_regular_dict_by_key(lexiconOut);
 
     lenMergedLexicon = len(lexiconOut);
     if not lenBothLexicons >= lenMergedLexicon:
@@ -638,7 +627,7 @@ def get_homophones(lexicon: dict) -> dict:
     for key, vals in reverseLexicon.items():
         if len(vals) > 1:
             lexiconHomophone.update({key: vals});
-    sort_any_dict_by_key(lexiconHomophone);
+    sort_regular_dict_by_key(lexiconHomophone);
     return lexiconHomophone;
 
 

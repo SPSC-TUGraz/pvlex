@@ -276,7 +276,8 @@ class PronVarGenerator():
             lexiconPVs.update({word: myProns});
 
         self.lexiconPVs = lexiconPVs;
-
+        self.display_verbose_info(self.gen_pron_vars.__name__,
+                                  "generated PV lexicon is stored in member variable self.lexiconPVs")
         return;
 
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -1932,6 +1933,13 @@ class PronVarGenerator():
     # # # non-rule-related methods and functions  # # # # # # # # # # # # # # # # # # # # # # # # #
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
+    def sort_by_keys(self) -> dict:
+        """
+        This method sorts a pronunciation dictionary by keys (this dictrionary is different in the VIEW from a standard
+        Python dict).
+        """
+        return OrderedDict(sorted(self.lexiconPVs.items()));
+
     def remove_duplicates_from_lexicon(self, lexWduplicates: dict):
         """ check.
         2do: maybe deprecated now
@@ -1995,7 +2003,8 @@ class PronVarGenerator():
         with open(os.path.join(self.lexPath, 'rule_count.txt'), 'w', encoding='utf-8') as f:
             for key, val in self.ruleCounter.items():
                 f.write(key + '\t' + str(val) + '\n');
-        print(f"Rule count saved to {os.path.join(self.lexPath, 'rule_count.txt')}");
+        self.display_verbose_info(self.gen_pron_vars.__name__,
+                                  f"Rule count saved to {os.path.join(self.lexPath, 'rule_count.txt')}");
         return;
 
     def write_lexicon(self, case="", nameExtension=""):
