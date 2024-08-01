@@ -32,7 +32,7 @@ def grasslang2g2plang(cfg: dict, lang: str) -> str:
     return g2plangs[lang];
 
 
-def generate_lexicon(inputLexName, fPath, config={}, wantPVs=True) -> (dict, str):
+def generate_PV_lexicon(inputLexName, fPath, config={}, wantPVs=True) -> (dict, str):
     """
     Take (GRASS) canonical lexicon and *optionally* ...
     - create pronunciation variants (PVs),
@@ -306,4 +306,4 @@ if __name__ == "__main__":
 
     if cfg["BasePath"] != "":
         fpath = cfg["BasePath"]
-    generate_lexicon(inputLexName=inputlexname, fPath=fpath, config=cfg);
+    generate_PV_lexicon(inputLexName=inputlexname, fPath=fpath, config=cfg);
