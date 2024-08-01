@@ -258,7 +258,7 @@ class PronVarGenerator():
             myProns = self.l_vocalisation_V(word, myProns);
             myProns = self.lenition_plosive_V(word, myProns);
             myProns = self.Cx_deletion_coda_V(word, myProns);
-            # myProns = self.h_deletion_onset_V(word, myProns);
+            myProns = self.h_deletion_onset_V(word, myProns);
 
             myProns = self.schwa_deletion_before_n_V(word, myProns);
             myProns = self.nm2m_V(word, myProns);
@@ -1634,8 +1634,8 @@ class PronVarGenerator():
     def final_n2m_V(self, word: str, pronsWcodes: list):
         """
         2do: update docu
-        Tropenholzart: t r o: p n h O l ts a r t
-                    -> t r o: p m h O l ts a r t
+        haben: h a: b n
+               -> h a: b m
         Attention: This rule normally only applies if a schwa deletion occured
 
         Parameters
@@ -1901,6 +1901,52 @@ class PronVarGenerator():
         # pronsWcodesClean = remove_duplicates(pronsWcodesNew);
         # return pronsWcodesClean;
         return pronsWcodes;
+
+    def h_deletion_onset_V(self, word: str, pronsWcodes: list):
+        """
+        This method deletes a pronounced 'h' in an onset position (word initial).
+        Heft: 'h E f t
+               -> 'E f t
+        Attention: This is a coarticulation rule for realisation between neighbouring words.
+        It would not occur for standalone or phrase-inital words.
+
+        Parameters
+        ----------
+        word : str
+            current word
+        pronsWcodes  :  list
+            list with pronunciations for word
+
+        Returns
+        -------
+        word_pron_list_new  :  list
+
+        """
+        if not self.rules['h_deletion_onset_V']:
+            return pronsWcodes;
+
+        if not isinstance(pronsWcodes, list):
+            print('2do: exception handling here')
+        else:
+            # Pronunciation(word_pron, ['canon'])
+            pronsWcodesNew = copy.deepcopy(pronsWcodes);
+            r1 = re.compile(r'^h', re.IGNORECASE)
+            for wordPron in pronsWcodes:
+                if r1.search(word):
+                    tmpPron = re.sub("^('?)h", r"\1", wordPron.pron)
+                    tmpPron = re.sub("' ", r"'", tmpPron)
+                    tmpPron = tmpPron.strip();
+                    newPron = Pronunciation(tmpPron, wordPron.rules);
+
+                    if newPron != wordPron:
+                        newPron.add('h_deletion_onset_V');
+                        pronsWcodesNew.append(newPron);
+                        # print(f"{word} :  {wordPron.pron}\t-->\t{newPron.pron}\t[{inspect.stack()[0][3]}]");
+                        self.ruleCounter['h_deletion_onset_V'] += 1;
+
+        pronsWcodesClean = remove_duplicates(pronsWcodesNew);
+
+        return pronsWcodesClean;
 
     def wordfinal_plosive_deletion_V(self, word: str, pronsWcodes: list) -> list:
         """
