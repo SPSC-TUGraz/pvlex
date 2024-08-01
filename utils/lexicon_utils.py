@@ -468,6 +468,24 @@ def postprocess_g2p(g2pout: str, fPath, inputLexName) -> dict:
     print(f"saved original g2p output to \n{fPath}/{strip_file_extension(inputLexName)}_g2pout.txt")
     return lexiconRaw;
 
+def check_and_prepare_wordlist(fPath: str, wlName: str) -> int:
+    """
+    Check whether the word list exists, and remove potential duplicate words. Return number of words in the word list.
+    """
+    try:
+        with open('/'.join([fPath, wlName]), 'r', encoding='utf-8') as wl:
+            wordList = wl.readlines()
+            wordListNew = list(set(wordList))
+            if len(wordListNew) != len(wordList):
+                with open('/'.join([fPath, wlName + ".bckp"]), 'w', encoding='utf-8') as bckp:
+                    bckp.writelines(sorted(wordList))
+                with open('/'.join([fPath, wlName]), 'w', encoding='utf-8') as wl_no_duplicates:
+                    wl_no_duplicates.writelines(sorted(wordListNew))
+    except FileNotFoundError:
+        raise FileNotFoundError(f"Could not find German wordlist (file {wlName}) in {fPath}.\n"
+                                f"There's nothing I can do for you.")
+    return len(wordListNew);
+
 def grasslang2g2plang(g2plangs: dict, lang: str) -> str:
     """
     Convert name of language code to its g2p representation.

@@ -57,20 +57,17 @@ def generate_PV_lexicon(inputLexName, fPath, config={}, wantPVs=True) -> (dict, 
 
     else:
         # no lexicon found or should be updated, load wordlist and send to g2p for getting canonical pronunciations
-        try:
-            wordlistName = config["WordListName"]
-            wordList = open('/'.join([fPath, wordlistName]), 'r', encoding='utf-8').readlines()
-        except FileNotFoundError:
-            raise FileNotFoundError(f"Could not find German wordlist (file {wordlistName}) in {fPath}.\n"
-                                    f"There's nothing I can do for you.")
+        wordlistName = config["WordListName"]
+        nWords = check_and_prepare_wordlist(fPath, wlName=wordlistName)
+
         parser = g2p.parser;
         print(os.path.join(config["BasePath"], wordlistName))
         mainLanguage = grasslang2g2plang(cfg["GeneralSettings"]["PronunciationSettings"]["LanguageTagsG2P"], config["MainLanguage"])
         args = parser.parse_args([os.path.join(fPath, wordlistName), '--iform=txt', '--oform=tab',
                                   '--stress=yes', '--syl=yes', f"--lng={mainLanguage}"])
-        print(f"... using g2p for {mainLanguage} ({len(wordList)} words) ...")
+        print(f"... using g2p for {mainLanguage} ({nWords} words) ...")
         g2pOutput = g2p.process(args);
-        # postprocess raw g2p output 
+        # postprocess raw g2p output
         lexiconRaw = postprocess_g2p(g2pOutput, fPath, inputLexName);
 
         loadPath = os.path.join(fPath, "SpecialLexicons");
