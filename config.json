@@ -1,0 +1,154 @@
+{ // input path where wordlists are stored and where files will be saved
+  "BasePath": "C:/Users/kia/Documents/uni/TUGraz/oWork/1Projects/StateOfStudyFair/pvlexicon/data/wordlists", // if empty, cwd
+//  "RawGermanLexicon": "lexiconGRASSGermanRaw.txt", // name of the raw input lexicon which contains German words only
+  "RawGermanLexicon": "lexiconDEURaw.txt", // name of the raw input lexicon which will contain German words only
+  "OriginalLexiconName": "lexicon_SF.txt", // name of the original corpus lexicon
+//  "OriginalLexiconName": "lexicon_GRASS.txt", // name of the original corpus lexicon
+//  "OriginalLexiconName": "lexicon_GRASS.txt", // name of the original corpus lexicon
+  "FinalLexiconName": "lexiconLatest.txt", // name of the output lexicon
+  "GeneralSettings": {
+    "want2GenPVs": 1, // 1: apply rules, 0: don't apply rules
+    "ruleSets": { // you can switch on/off whole groups of rules here; individual rules are defined below
+      "InputSwitchGG2AG": 1,
+      "ConversationalGeneralGerman": 1,
+      "ConversationalAustrianGerman": 1
+    },
+    "case": "lower", // lowercase final lexicon
+
+    "overwritePronunciations": {
+      "overwriteG2Perrors": { // some generated canonical pronunciations are wrong
+        "want2do": 1, // overwrite with manual lexicon
+        "lexName": "__ManualG2PCorrections.txt" // name of this manual lexicon
+      },
+      "overwriteDenglisch": {
+        "want2do": 1,
+        "lexName": "__DenglishWords.txt"
+      }
+    },
+    "PronunciationSettings": {
+      "LanguageTagsG2P": {
+        "DE": "deu",
+        "DI": "deu", // Dialect
+        "DG": "deu", // Dialect
+        "DEN": "deu", // Denglish
+        "EN": "eng",
+        "HR": "hun",
+        "FR": "fra-FR",
+        "IT": "ita",
+        "JA": "jpn-JP",
+        "PT": "spa-ES",
+        "ES": "spa-ES",
+        "SV": "swe-SE",
+        "L": "deu"
+      }
+    },
+    // 2do: glottal stop yes/no
+    "convertLong2ShortVowels": 1, // 1: long vowels like [a:] are transformed to short ones [a] AFTER PV generation
+    "reducePhoneSet": 1, // 1: merge specific phones as defined in PhoneSetMinimisation (key is replaced with value)
+    "PhoneSetMinimisation": {
+      "Y6": "y6",
+      "r": "R",
+      "26": "96",
+      "3": "96",
+      "E6": "e6",
+      "I6": "i6",
+      "O6": "o6"
+    }
+  },
+
+  "PronunciationVariation": { // actual rules for PV generation, grouped as defined in ruleSets above;
+                              // short description via example below, detailed description in ... 2do!
+    "InputSwitchGG2AG": { // replace(!) German German (GG) standard pronunciation with Austrian German (AG) standard
+      "finalC_as_k_R": 1, // richtig: R I C t I C  -->  R I C t I k
+      "medialC_as_k_V": 1, // belustigt: R I C t I C  -->  R I C t I k
+      "voiced2unvoiced_s_R": 1, // sicher: z I C E6  -->  s I C E6
+      "rC2rx_V": 1, // Kirchen: k I6 C @ n  -->  k I6 x @ n
+      "wordinitial_che_chi2ke_ki_R": 1, // china:  C i: n a:  -->  k i: n a:
+      "wordinitial_closed_U_R": 1 // Uni:  U n i:  -->  u: n i: (wenn u betont; z.B. NICHT "Umgebung") <- 2do: richtig?
+    },
+
+    // rules that hold for conversational speech (CS): reductions, substitutions, ...
+    "ConversationalGeneralGerman": { // rules that hold for both AG and GG
+      "alveolar_plosive_deletion_afterbefore_n_V": 1, // wesentlich:  v e: s @ n t l I C	 -->	v e: s @ n l I C
+      "bilabial_plosive_deletion_afterbefore_m_V": 1, // durchkämpft : d U6 C k E m p f t  -->  d U6 C k E m f t (<- die ist eig. GG: Pfanne, Impfung, Pferd)
+      "carryover_assimilation_plosives_V": 1, // Stadtblatt: S t a t b l a t  -->  S t a t p l a t
+      "Cx_deletion_coda_V": 1, // Wahrscheinlichkeit :  v a: 6 S aI n l I C k aI t  -->  v a: 6 S aI n l I k aI t
+      "final_n2m_V": 1, // haben:  h a: b n  -->  h a: b m  (Nasalassimilierung)
+      "gn2N_V": 1, // magnetisch: m a g n e: t I S  -->  m a N n e: t I S  (Nasalassimilierung)
+      "gschwan2N_V": 1, // tragen :  t r a: g @ n  -->  t r a: N  (Nasalassimilierung)
+      "nm2m_V": 1, // deinem:     d aI n m  -->  d aI m  (Nasalassimilierung)
+      "Nschwan2N_V": 1, // aufgegangen :  aU f g @ g a N @ n  -->  aU f g @ g a N  (Nasalassimilierung)
+      "r_deletion_coda_R": 1, // Arm: a: r m  -->  a: m
+      "r_substitution_coda_R": 1, // warten:     v a r t @ n  -->  v a: t @ n
+      "schwa_deletion_before_n_V": 1, // sprechen :  S p r E C @ n  -->  S p r E C n
+      "schwa_deletion_unstressed_closedsyllable_V": 1, // Gedudel :  g @ 'd u: d @ l	-->	 g @ 'd u: d l
+      "t_deletion_before_plosives_V": 1, // Kreditkarte:  k r e d i: t k a r t @  -->  k r e d i: k a r t @
+      "t_delition_in_consonantClusters_V": 1, // dutzendfach: d U t s @ n t f a x  -->  d U t s @ n f a x
+      "t_delition_in_sClusters_V": 1, // Festplatte:  f E s t p l a t @  -->  f E s p l a t @
+      "wordfinal_plosive_deletion_V": 1 // context rule!! (does only make sense for neighboured words)
+    },
+    "ConversationalAustrianGerman": { // rules that are specific for the AG variety of German
+      "full_vowel_substitution_V": 1, // e.g., habe : h a: b @  -->  h O: b @  "Vokalverdunklung"
+      "ge_deletion_plosives_V": 1, // geklaut:	 g @ k l aU t -> k l aU t
+      "ge_deletion_sibilantAffricates_V": 1, // gezahlt :  g @ ts a: l t  -->  ts a: l t
+      "l_vocalisation_V": 1, // voll:  f O l  --> f OY / f uI
+      "lenition_plosive_V": 1, // Arbeit  a: b aI t  -->  a: v aI t
+//      "medialC_as_k_V": 1, // dreißigsten: 	d r aI s I C s t @ n  -->  d r aI s I k s t @ n
+      "schwa_deletion_unstressed_opensyllable_V": 1, // Gerät :  g @ r E: t  -->  g r E: t (exclusively AG?)
+      "schwa_deletion_in_ge_V": 1, // gemacht: g @ m a x t  -->  g m a x t
+      "vowel_diphthong_exchange_V": 1 // zwei: ts v aI  --> ts v a:
+    },
+    // not yet implemented
+    "h_deletion_onset_V": 0,
+    "monoph2schwa_V": 0
+  },
+  "wantPoS": 0, // 1: get Part-of-Speech (PoS) tags for lexical tokens, 0: no PoS
+  "SpecialLexicons": { // append additional lexicons with special words, foreign language words, ... (rules are not applied to these tokens)
+    // 2do: addSpecialLexicons: true/false
+    "LoadPath": "data/SpecialLexicons", // path of special lexicons
+    "Lexicons": {
+      "addBrokenWords": {
+      "want2add": 1,
+      "lexName": "__BrokenWords.txt"
+      },
+      "addDialectWords": {
+        "want2add": 1,
+        "lexName": "__ManualDialectExotic.txt"
+      },
+      "addAblautImPraesens": {
+        "want2add": 1,
+        "lexName": "__AblautImPraesens.txt"
+      },
+      "addForeignWords": {
+        "want2add": 1,
+        "lexName": "__ForeignWords.txt"
+      },
+      "addForeignWordsHalbgar": {
+        "want2add": 1,
+        "lexName": "__ForeignWordsHalbgar.txt"
+      },
+      "addAphabet": {
+        "want2add": 1,
+        "lexName": "__SpellingAlphabet.txt"
+      },
+      "addMultiWords": {
+        "want2add": 1,
+        "lexName": "__MultiWordExpressions.txt"
+      }
+    }
+  },
+  "addCorpora": { // add wordlist/lexicon (if file is found) of other corpora; optionally create PVs for the new words
+    "Kiel":  { // name of the corpus
+      "want2add": 0, // add this corpus
+      "generatePVs4thisLexicon": 1, // 1: apply PV rules on this corpus; 0: don't apply PV rules
+      "fileName": "lexiconKiel.txt", // try to load canonical lexicon
+      "wordListName": "wordListKiel.txt" // if no lexicon found, try to load wordlist
+    },
+    "GECO": {
+      "want2add": 0, // add this corpus
+      "generatePVs4thisLexicon": 1, // 1: apply PV rules on this corpus; 0: don't apply PV rules
+      "fileName": "lexiconGECO.txt", // try to load canonical lexicon
+      "wordListName": "wordListGECO.txt" // if no lexicon found, try to load wordlist
+    }
+  }
+}

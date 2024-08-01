@@ -1,0 +1,5 @@
+json5>=0.9.10
+regex>=2022.7.9
+setuptools==65.5.0
+pandas
+numpy
