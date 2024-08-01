@@ -9,7 +9,7 @@ from utils.lexicon_utils import *
 import re
 
 
-def lang2g2plang(cfg: dict, lang: str) -> str:
+def grasslang2g2plang(cfg: dict, lang: str) -> str:
     """
     Convert name of language code to its g2p representation.
     """
@@ -261,7 +261,7 @@ def generate_lexicon(inputLexName, fPath, config={}, wantPVs=True) -> (dict, str
         # filepath = os.path.join(os.path.dirname(os.getcwd()), 'data', 'wordlist_caseSensitive.txt')
         fNames = [fn for fn in os.listdir(f"{os.path.join(fPath, 'WordLists')}") if fn.startswith("wordlist")];
         for fName in fNames:
-            language = lang2g2plang(config, re.sub(r"wordlist([A-Z]+)\.txt", r"\1", fName));
+            language = grasslang2g2plang(config, re.sub(r"wordlist([A-Z]+)\.txt", r"\1", fName));
             wordListPath = f"{fPath}/WordLists/{fName}";
             parser = g2p.make_parser();
             args = parser.parse_args([wordListPath, '--iform=txt', '--oform=extbpfs',
