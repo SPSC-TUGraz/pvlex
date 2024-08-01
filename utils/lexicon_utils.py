@@ -12,6 +12,7 @@ import inspect
 import re
 from utils.NewPronVarGenerator import PronVarGenerator
 import pickle
+import pandas as pd
 
 
 def strip_file_extension(string):
@@ -447,6 +448,25 @@ def rule_clusters(rule):
     elif rule in schwa_deletion:
         result = 'schwa_deletion'
     return result
+
+def postprocess_g2p(g2pout: str, fPath, inputLexName) -> dict:
+    """
+    Convert g2p output to Python dict and save to file.
+    """
+    g2pOutputCrazy = g2pout.split('\n');
+    lexiconRaw = {};
+    for pair in g2pOutputCrazy:
+        if pair.strip() != "":
+            try:
+                lexiconRaw.update({pair.split(';')[0]: pair.split(';')[1]})
+            except IndexError:
+                print(f"skipping invalid line in g2p output:\n{pair}")
+    # save raw g2p output to file
+    df = pd.DataFrame.from_dict(lexiconRaw, orient="index")
+    df.sort_index(inplace=True)
+    df.to_csv(f"{fPath}/{strip_file_extension(inputLexName)}_g2pout.txt", sep='\t', header=False);
+    print(f"saved original g2p output to \n{fPath}/{strip_file_extension(inputLexName)}_g2pout.txt")
+    return lexiconRaw;
 
 def grasslang2g2plang(g2plangs: dict, lang: str) -> str:
     """

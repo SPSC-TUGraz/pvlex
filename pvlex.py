@@ -58,31 +58,20 @@ def generate_PV_lexicon(inputLexName, fPath, config={}, wantPVs=True) -> (dict, 
     else:
         # no lexicon found or should be updated, load wordlist and send to g2p for getting canonical pronunciations
         try:
-            wordlistNName = config["WordListName"]
-            wordList = open('/'.join([fPath, wordlistNName]), 'r', encoding='utf-8').readlines()
+            wordlistName = config["WordListName"]
+            wordList = open('/'.join([fPath, wordlistName]), 'r', encoding='utf-8').readlines()
         except FileNotFoundError:
-            raise FileNotFoundError(f"Could not find German wordlist (file {wordlistNName}) in {fPath}.\n"
+            raise FileNotFoundError(f"Could not find German wordlist (file {wordlistName}) in {fPath}.\n"
                                     f"There's nothing I can do for you.")
         parser = g2p.parser;
-        print(os.path.join(config["BasePath"], wordlistNName))
+        print(os.path.join(config["BasePath"], wordlistName))
         mainLanguage = grasslang2g2plang(cfg["GeneralSettings"]["PronunciationSettings"]["LanguageTagsG2P"], config["MainLanguage"])
-        args = parser.parse_args([os.path.join(fPath, wordlistNName), '--iform=txt', '--oform=tab',
+        args = parser.parse_args([os.path.join(fPath, wordlistName), '--iform=txt', '--oform=tab',
                                   '--stress=yes', '--syl=yes', f"--lng={mainLanguage}"])
         print(f"... using g2p for {mainLanguage} ({len(wordList)} words) ...")
         g2pOutput = g2p.process(args);
-        g2pOutputCrazy = g2pOutput.split('\n');
-        with open(f"{fPath}/{inputLexName}.txt", 'w', encoding='utf-8') as f:
-            for line in sorted(g2pOutputCrazy):
-                if line:
-                    f.write('\t'.join(line.split(';')) + '\n');
-        lexTmp = {};
-        with open(f"{fPath}/{inputLexName}.txt", 'r', encoding='utf-8') as f:
-            tmp = f.read().splitlines();
-            for line in tmp:
-                k, v = line.split('\t')
-                lexTmp.update({k: v})
-        lexiconRaw = {};
-        lexiconRaw.update(lexTmp);
+        # postprocess raw g2p output 
+        lexiconRaw = postprocess_g2p(g2pOutput, fPath, inputLexName);
 
         loadPath = os.path.join(fPath, "SpecialLexicons");
         for lexName in config["GeneralSettings"]["overwritePronunciations"].keys():
