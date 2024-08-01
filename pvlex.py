@@ -60,9 +60,11 @@ def generate_PV_lexicon(inputLexName, fPath, config={}, wantPVs=True) -> (dict, 
         wordlistName = config["WordListName"]
         nWords = check_and_prepare_wordlist(fPath, wlName=wordlistName)
 
+        # get canonical pronunciations from grapheme-to-phoneme (g2p) conversion tool
         parser = g2p.parser;
         print(os.path.join(config["BasePath"], wordlistName))
-        mainLanguage = grasslang2g2plang(cfg["GeneralSettings"]["PronunciationSettings"]["LanguageTagsG2P"], config["MainLanguage"])
+        mainLanguage = grasslang2g2plang(cfg["GeneralSettings"]["PronunciationSettings"]["LanguageTagsG2P"],
+                                         config["MainLanguage"])
         args = parser.parse_args([os.path.join(fPath, wordlistName), '--iform=txt', '--oform=tab',
                                   '--stress=yes', '--syl=yes', f"--lng={mainLanguage}"])
         print(f"... using g2p for {mainLanguage} ({nWords} words) ...")
@@ -70,22 +72,10 @@ def generate_PV_lexicon(inputLexName, fPath, config={}, wantPVs=True) -> (dict, 
         # postprocess raw g2p output
         lexiconRaw = postprocess_g2p(g2pOutput, fPath, inputLexName);
 
-        loadPath = os.path.join(fPath, "SpecialLexicons");
-        for lexName in config["GeneralSettings"]["overwritePronunciations"].keys():
-            if bool(config["GeneralSettings"]["overwritePronunciations"][lexName]["want2do"]) is True:
-                fNameManCorr = config["GeneralSettings"]["overwritePronunciations"][lexName]["lexName"]
-                try:
-                    correctedLines = open(os.path.join(loadPath, fNameManCorr), 'r',
-                                          encoding='utf-8').read().splitlines();
-                    corrLines = {};
-                    for lin in correctedLines:
-                        corrLines.update({lin.split('\t')[0]: lin.split('\t')[1]})
-                    for key, val in lexiconRaw.items():
-                        if key in corrLines:
-                            lexiconRaw.update({key: corrLines[key]});
-                except FileNotFoundError:
-                    print(f"You wanted to {lexName} pronunciation with manual corrections but no file with\n"
-                                      f"these corrections could be found ({fNameManCorr}).\nI'll discard that step.")
+    # overwrite some wrong g2p pronunciations
+    if config["GeneralSettings"]["overwritePronunciations"]["want2do"] is True:
+        loadPath = '/'.join([fPath, "SpecialLexicons"]);
+        lexiconRaw = overwrite_pronunciations(loadPath, lexiconRaw)
 
     # write homophone lexicon at this stage
     lexHomophonesOnly = get_homophones(lexiconRaw);

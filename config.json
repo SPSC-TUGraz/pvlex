@@ -20,12 +20,13 @@
     "case": "lower", // lowercase final lexicon
 
     "overwritePronunciations": {
+      "want2do": true, // do you want to do *any* of the changes defined here? (specify which ones in subsections)
       "overwriteG2Perrors": { // some generated canonical pronunciations are wrong
-        "want2do": 1, // overwrite with manual lexicon
+        "want2do": tru, // overwrite with manual lexicon
         "lexName": "__ManualG2PCorrections.txt" // name of this manual lexicon
       },
       "overwriteDenglisch": {
-        "want2do": 1,
+        "want2do": true,
         "lexName": "__DenglishWords.txt"
       }
     },

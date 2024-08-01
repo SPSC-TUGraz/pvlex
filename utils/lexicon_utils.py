@@ -486,6 +486,30 @@ def check_and_prepare_wordlist(fPath: str, wlName: str) -> int:
                                 f"There's nothing I can do for you.")
     return len(wordListNew);
 
+def overwrite_pronunciations(cfg, fPath, lex):
+    """
+    Overwrite specific pronunciations (as defined in the special lexicons).
+    Why?
+    - Non-existing-on-the-fly-created words (often Denglish) might have a wrong pronunciation.
+    - There are a couple of systematic errors in the g2p output.
+    """
+    for lexName in cfg["GeneralSettings"]["overwritePronunciations"].keys():
+        if cfg["GeneralSettings"]["overwritePronunciations"][lexName]["want2do"] is True:
+            fNameManCorr = cfg["GeneralSettings"]["overwritePronunciations"][lexName]["lexName"]
+            try:
+                correctedLines = open(os.path.join(fPath, fNameManCorr), 'r',
+                                      encoding='utf-8').read().splitlines();
+                corrLines = {};
+                for lin in correctedLines:
+                    corrLines.update({lin.split('\t')[0]: lin.split('\t')[1]})
+                for key, val in lex.items():
+                    if key in corrLines:
+                        lex.update({key: corrLines[key]});
+            except FileNotFoundError:
+                print(f"You wanted to {lexName} pronunciation with manual corrections but no file with\n"
+                      f"these corrections could be found ({fNameManCorr}).\nI'll discard that step.")
+    return lex;
+
 def grasslang2g2plang(g2plangs: dict, lang: str) -> str:
     """
     Convert name of language code to its g2p representation.
