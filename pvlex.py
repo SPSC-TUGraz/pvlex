@@ -77,6 +77,7 @@ def generate_PV_lexicon(inputLexName, fPath, config={}, wantPVs=True) -> (dict, 
         loadPath = '/'.join([fPath, "SpecialLexicons"]);
         lexiconRaw = overwrite_pronunciations(loadPath, lexiconRaw)
 
+    # 2do: HIER
     # write homophone lexicon at this stage
     lexHomophonesOnly = get_homophones(lexiconRaw);
     write_homophone_lexicon(lexHomophonesOnly, inputLexName, fPath, nameExtension="Original");
