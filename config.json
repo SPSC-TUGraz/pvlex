@@ -17,7 +17,6 @@
       "ConversationalAustrianGerman": 1
     },
     "case": "lower", // lowercase final lexicon
-
     "overwritePronunciations": {
       "want2do": true, // do you want to do *any* of the changes defined here? (specify which ones in subsections)
       "LexNames": {
@@ -60,7 +59,8 @@
       "E6": "e6",
       "I6": "i6",
       "O6": "o6"
-    }
+    },
+    "wantPoS": 0, // 1: get Part-of-Speech (PoS) tags for lexical tokens, 0: no PoS
   },
 
   "PronunciationVariation": { // actual rules for PV generation, grouped as defined in ruleSets above;
@@ -109,7 +109,6 @@
     // not yet implemented
     "monoph2schwa_V": 0
   },
-  "wantPoS": 0, // 1: get Part-of-Speech (PoS) tags for lexical tokens, 0: no PoS
   "SpecialLexicons": { // append additional lexicons with special words, foreign language words, ... (rules are not applied to these tokens)
     // 2do: addSpecialLexicons: true/false
     "LoadPath": "data/SpecialLexicons", // path of special lexicons

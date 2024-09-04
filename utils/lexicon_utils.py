@@ -4,13 +4,14 @@ Some useful scripts for handling lexicons for Kaldi.
 @author: kia
 """
 
-import os
-import copy
-from collections import OrderedDict
-from utils.Pronunciation import Pronunciation
+# import os
+# import copy
+# from collections import OrderedDict
+# from utils.Pronunciation import Pronunciation
+from utils.NewPronVarGenerator import *
 import inspect
 import re
-from utils.NewPronVarGenerator import PronVarGenerator
+# from utils import *
 import pickle
 import pandas as pd
 
@@ -759,7 +760,7 @@ def convert2austrianPhones(lexicon: dict, isPronLex=False) -> dict:
                 newPron = Pronunciation(valNew, valOld.rules);
             newVals.append(newPron);
         if isPronLex is True:
-            listWOduplicates = NewPronVarGenerator.remove_duplicates(newVals)
+            listWOduplicates = remove_duplicate_pronunciations(newVals)
         else:
             listWOduplicates = newVals;
         lexiconNew.update({key: listWOduplicates});
@@ -781,7 +782,7 @@ def long2shortVowels(lexicon: dict) -> dict:
             valNew = re.sub(":", "", val.pron);
             newPron = Pronunciation(valNew, val.rules);
             newVals.append(newPron);
-        listWOduplicates = NewPronVarGenerator.remove_duplicates(newVals)
+        listWOduplicates = remove_duplicate_pronunciations(newVals)
         lexiconNew.update({key: listWOduplicates});
 
     return lexiconNew;
@@ -808,7 +809,7 @@ def reduce_phone_set(lexicon: dict, mergePhones: dict) -> dict:
                 newVals.append(newPron);
             else:
                 newVals.append(val)
-        listWOduplicates = NewPronVarGenerator.remove_duplicates(newVals)
+        listWOduplicates = remove_duplicate_pronunciations(newVals)
         lexiconNew.update({key: listWOduplicates});
 
     return lexiconNew;

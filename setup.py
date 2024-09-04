@@ -4,9 +4,9 @@ with open("README.md", "r", encoding="utf-8") as fd:
     long_description = fd.read()
 
 setuptools.setup(
-    name="swekia", # Replace with your own username
+    name="pvlex",
     version="0.0.1",
-    author="Saskia Wepner",
+    author="swekia",
     author_email="wepner@tugraz.at",
     description="Create pronunciation lexicon with variants for Austrian German conversational speech.",
     long_description=long_description,
@@ -20,6 +20,7 @@ setuptools.setup(
     ],
     python_requires=">=3.8",
     install_requires=[
+        "g2p @ file://localhost/%s/g2p/" % os.getcwd().replace('\\', '/'),
         "json5",
         "numpy",
         "os",

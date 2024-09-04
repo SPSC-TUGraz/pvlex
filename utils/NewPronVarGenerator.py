@@ -43,7 +43,7 @@ def move_syllable_stress(lexRaw: dict) -> dict:
     return lexNew;
 
 
-def remove_duplicates(listWduplicates: list) -> list:
+def remove_duplicate_pronunciations(listWduplicates: list) -> list:
     """
         This method removes duplicates in a list of Pronunciations, i.e.
         e.g.  ["? ' a:", "? ' a:", "? ' O:", "? ' O:"]
@@ -149,7 +149,7 @@ def remove_illegal_neighbourhood(word, listWillegal: list, recentRule: Optional[
         newPronVar = Pronunciation(' '.join(tmpPronVar.split()), pronVar.rules);
         listWOillegal.append(newPronVar);
 
-    listWOillegal = remove_duplicates(listWOillegal);
+    listWOillegal = remove_duplicate_pronunciations(listWOillegal);
     return listWOillegal;
 
 
@@ -323,7 +323,7 @@ class PronVarGenerator():
                     myPron.replace(wordPron.strip(), 'finalC_as_k_R');
                     self.ruleCounter['finalC_as_k_R'] += 1;
                 pronsWcodesNew.append(myPron);
-        pronsWcodesClean = remove_duplicates(pronsWcodesNew);
+        pronsWcodesClean = remove_duplicate_pronunciations(pronsWcodesNew);
         return pronsWcodesClean;
 
     def wordinitial_closed_U_R(self, word: str, pronsWcodes: list) -> list:
@@ -363,7 +363,7 @@ class PronVarGenerator():
                         # print(f"{word} :  {wordPron.pron}\t-->\t{newPron.pron}\t[{inspect.stack()[0][3]}]");
                     myPron.replace(wordPron.strip(), 'wordinitial_closed_U_R');
                 pronsWcodesNew.append(myPron);
-        pronsWcodesClean = remove_duplicates(pronsWcodesNew);
+        pronsWcodesClean = remove_duplicate_pronunciations(pronsWcodesNew);
         return pronsWcodesClean;
 
     def wordinitial_che_chi2ke_ki_R(self, word: str, pronsWcodes: list) -> list:
@@ -385,7 +385,7 @@ class PronVarGenerator():
                     myPron.replace(wordPron.strip(), 'wordinitial_che_chi2ke_ki_R');
                     self.ruleCounter['wordinitial_che_chi2ke_ki_R'] += 1;
                 pronsWcodesNew.append(myPron);
-        pronsWcodesClean = remove_duplicates(pronsWcodesNew);
+        pronsWcodesClean = remove_duplicate_pronunciations(pronsWcodesNew);
         return pronsWcodesClean;
 
     def medialC_as_k_V(self, word: str, pronsWcodes: list) -> list:
@@ -433,7 +433,7 @@ class PronVarGenerator():
                         # print(f"{word} :  {wordPron.pron}\t-->\t{newPron.pron}\t[{inspect.stack()[0][3]}]");
                         self.ruleCounter['medialC_as_k_V'] += 1;
 
-        pronsWcodesClean = remove_duplicates(pronsWcodesNew);
+        pronsWcodesClean = remove_duplicate_pronunciations(pronsWcodesNew);
         return pronsWcodesClean;
 
     def voiced2unvoiced_s_R(self, word: str, pronsWcodes: list) -> list:
@@ -474,7 +474,7 @@ class PronVarGenerator():
                     self.ruleCounter['voiced2unvoiced_s_R'] += 1;
                     myPron.replace(tmp, 'voiced2unvoiced_s_R');
                 pronsWcodesNew.append(myPron);
-        pronsWcodesClean = remove_duplicates(pronsWcodesNew);
+        pronsWcodesClean = remove_duplicate_pronunciations(pronsWcodesNew);
         return pronsWcodesClean;
 
     def rC2rx_V(self, word: str, pronsWcodes: list) -> list:
@@ -533,7 +533,7 @@ class PronVarGenerator():
                     myPron.replace(tmpPron, 'rC2rx_V');
                 self.ruleCounter['rC2rx_V'] += 1;
                 pronsWcodesNew.append(myPron);
-            pronsWcodesClean = remove_duplicates(pronsWcodesNew);
+            pronsWcodesClean = remove_duplicate_pronunciations(pronsWcodesNew);
 
         if not pronsWcodesClean:
             return pronsWcodes;
@@ -643,7 +643,7 @@ class PronVarGenerator():
                 if newPron != wordPron:
                     self.ruleCounter['full_vowel_substitution_V'] += 1
 
-        pronsWcodesClean = remove_duplicates(pronsWcodesNew);
+        pronsWcodesClean = remove_duplicate_pronunciations(pronsWcodesNew);
         return pronsWcodesClean;
 
     def vowel_diphthong_exchange_V(self, word: str, pronsWcodes: list) -> list:
@@ -738,7 +738,7 @@ class PronVarGenerator():
                 if newPron != wordPron:
                     self.ruleCounter['vowel_diphthong_exchange_V'] += 1
 
-        pronsWcodesClean = remove_duplicates(pronsWcodesNew);
+        pronsWcodesClean = remove_duplicate_pronunciations(pronsWcodesNew);
         return pronsWcodesClean;
 
     def schwa_deletion_before_n_V(self, word: str, pronsWcodes: list) -> list:
@@ -783,7 +783,7 @@ class PronVarGenerator():
                     # print(f"{word} :  {wordPron.pron}\t-->\t{newPron.pron}\t[{inspect.stack()[0][3]}]");
                     self.ruleCounter['schwa_deletion_before_n_V'] += 1
 
-        pronsWcodesClean = remove_duplicates(pronsWcodesNew);
+        pronsWcodesClean = remove_duplicate_pronunciations(pronsWcodesNew);
         return pronsWcodesClean;
 
     def schwa_deletion_in_ge_V(self, word: str, pronsWcodes: list) -> list:
@@ -813,7 +813,7 @@ class PronVarGenerator():
                     self.ruleCounter['schwa_deletion_in_ge_V'] += 1
 
         pronsWcodesNew = remove_illegal_neighbourhood(word, pronsWcodesNew, 'schwa_deletion_in_ge_V');
-        pronsWcodesClean = remove_duplicates(pronsWcodesNew);
+        pronsWcodesClean = remove_duplicate_pronunciations(pronsWcodesNew);
         return pronsWcodesClean;
 
     def schwa_deletion_unstressed_opensyllable_V(self, word: str, pronsWcodes: list) -> list:
@@ -866,7 +866,7 @@ class PronVarGenerator():
                         self.ruleCounter['schwa_deletion_unstressed_opensyllable_V'] += 1
 
         pronsWcodesNew = remove_illegal_neighbourhood(word, pronsWcodesNew, 'schwa_deletion_unstressed_opensyllable_V');
-        pronsWcodesClean = remove_duplicates(pronsWcodesNew);
+        pronsWcodesClean = remove_duplicate_pronunciations(pronsWcodesNew);
         return pronsWcodesClean;
 
     def schwa_deletion_unstressed_closedsyllable_V(self, word: str, pronsWcodes: list):
@@ -917,7 +917,7 @@ class PronVarGenerator():
 
         pronsWcodesNew = remove_illegal_neighbourhood(word, pronsWcodesNew,
                                                       'schwa_deletion_unstressed_closedsyllable_V');
-        pronsWcodesClean = remove_duplicates(pronsWcodesNew);
+        pronsWcodesClean = remove_duplicate_pronunciations(pronsWcodesNew);
         return pronsWcodesClean;
 
     def ge_deletion_plosives_V(self, word: str, pronsWcodes: list) -> list:
@@ -960,7 +960,7 @@ class PronVarGenerator():
                         self.ruleCounter['ge_deletion_plosives_V'] += 1;
 
         pronsWcodesNew = remove_illegal_neighbourhood(word, pronsWcodesNew, 'ge_deletion_plosives_V');
-        pronsWcodesClean = remove_duplicates(pronsWcodesNew);
+        pronsWcodesClean = remove_duplicate_pronunciations(pronsWcodesNew);
         return pronsWcodesClean;
 
     def ge_deletion_sibilantAffricates_V(self, word: str, pronsWcodes: list) -> list:
@@ -1003,7 +1003,7 @@ class PronVarGenerator():
                         self.ruleCounter['ge_deletion_sibilantAffricates_V'] += 1
 
         pronsWcodesNew = remove_illegal_neighbourhood(word, pronsWcodesNew, 'ge_deletion_sibilantAffricates_V');
-        pronsWcodesClean = remove_duplicates(pronsWcodesNew);
+        pronsWcodesClean = remove_duplicate_pronunciations(pronsWcodesNew);
         return pronsWcodesClean;
 
     def gn2N_V(self, word: str, pronsWcodes: list):
@@ -1046,7 +1046,7 @@ class PronVarGenerator():
                         # print(f"{word} :  {wordPron.pron}\t-->\t{newPron.pron}\t[{inspect.stack()[0][3]}]");
                         self.ruleCounter['gn2N_V'] += 1
 
-        pronsWcodesClean = remove_duplicates(pronsWcodesNew);
+        pronsWcodesClean = remove_duplicate_pronunciations(pronsWcodesNew);
         return pronsWcodesClean;
 
     def gschwan2N_V(self, word: str, pronsWcodes: list):
@@ -1085,7 +1085,7 @@ class PronVarGenerator():
                     # print(f"{word} :  {wordPron.pron}\t-->\t{newPron.pron}\t[{inspect.stack()[0][3]}]");
                     self.ruleCounter['gschwan2N_V'] += 1
 
-        pronsWcodesClean = remove_duplicates(pronsWcodesNew);
+        pronsWcodesClean = remove_duplicate_pronunciations(pronsWcodesNew);
         return pronsWcodesClean;
 
     def Nschwan2N_V(self, word: str, pronsWcodes: list):
@@ -1124,7 +1124,7 @@ class PronVarGenerator():
                     # print(f"{word} :  {wordPron.pron}\t-->\t{newPron.pron}\t[{inspect.stack()[0][3]}]");
                     self.ruleCounter['Nschwan2N_V'] += 1
 
-        pronsWcodesClean = remove_duplicates(pronsWcodesNew);
+        pronsWcodesClean = remove_duplicate_pronunciations(pronsWcodesNew);
         return pronsWcodesClean;
 
     def nm2m_V(self, word: str, pronsWcodes: list):
@@ -1166,7 +1166,7 @@ class PronVarGenerator():
                     # print(f"{word} :  {wordPron.pron}\t-->\t{newPron.pron}\t[{inspect.stack()[0][3]}]");
                     self.ruleCounter['nm2m_V'] += 1
 
-        pronsWcodesClean = remove_duplicates(pronsWcodesNew);
+        pronsWcodesClean = remove_duplicate_pronunciations(pronsWcodesNew);
         return pronsWcodesClean;
 
     def r_deletion_coda_R(self, word: str, pronsWcodes: list) -> list:
@@ -1222,7 +1222,7 @@ class PronVarGenerator():
                 #     # print(f"{word} :  {wordPron.pron}\t-->\t{newPron.pron}\t[{inspect.stack()[0][3]}]");
 
         pronsWcodesNew = remove_illegal_neighbourhood(word, pronsWcodesNew, 'r_deletion_coda_R');
-        pronsWcodesClean = remove_duplicates(pronsWcodesNew);
+        pronsWcodesClean = remove_duplicate_pronunciations(pronsWcodesNew);
         return pronsWcodesClean;
 
     # def r_deletion_coda_R(self, word: str, pronsWcodes: list) -> list:
@@ -1314,7 +1314,7 @@ class PronVarGenerator():
                     self.ruleCounter['r_substitution_coda_R'] += 1
 
         pronsWcodesNew = remove_illegal_neighbourhood(word, pronsWcodesNew, 'r_substitution_coda_R');
-        pronsWcodesClean = remove_duplicates(pronsWcodesNew);
+        pronsWcodesClean = remove_duplicate_pronunciations(pronsWcodesNew);
         return pronsWcodesClean;
 
     # def r_substitution_beforeconsonant_R(self, word: str, pronsWcodes: list) -> list:
@@ -1404,7 +1404,7 @@ class PronVarGenerator():
                     # print(word + ' :  ' + wordPron.pron + '\t-->\t' + newPron.pron + '\t' + r'[' + inspect.stack()[0][3] + r']');
                     self.ruleCounter['t_delition_in_sClusters_V'] += 1
 
-        pronsWcodesClean = remove_duplicates(pronsWcodesNew);
+        pronsWcodesClean = remove_duplicate_pronunciations(pronsWcodesNew);
         return pronsWcodesClean;
 
     def t_delition_in_consonantClusters_V(self, word: str, pronsWcodes: list):
@@ -1449,7 +1449,7 @@ class PronVarGenerator():
                     self.ruleCounter['t_delition_in_consonantClusters_V'] += 1
                     # print(word + ' :  ' + wordPron.pron + '\t-->\t' + newPron.pron + '\t' + r'[' + inspect.stack()[0][3] + r']');
 
-        pronsWcodesClean = remove_duplicates(pronsWcodesNew);
+        pronsWcodesClean = remove_duplicate_pronunciations(pronsWcodesNew);
         return pronsWcodesClean;
 
     def t_deletion_before_plosives_V(self, word: str, pronsWcodes: list):
@@ -1489,7 +1489,7 @@ class PronVarGenerator():
                     # print(word + ' :  ' + wordPron.pron + '\t-->\t' + newPron.pron + '\t' + r'[' + inspect.stack()[0][3] + r']');
                     self.ruleCounter['t_deletion_before_plosives_V'] += 1
 
-        pronsWcodesClean = remove_duplicates(pronsWcodesNew);
+        pronsWcodesClean = remove_duplicate_pronunciations(pronsWcodesNew);
         return pronsWcodesClean;
 
     def carryover_assimilation_plosives_V(self, word: str, pronsWcodes: list) -> list:
@@ -1533,7 +1533,7 @@ class PronVarGenerator():
                     # print(word + ' :  ' + wordPron.pron + '\t-->\t' + newPron.pron + '\t' + r'[' + inspect.stack()[0][3] + r']');
                     self.ruleCounter['carryover_assimilation_plosives_V'] += 1
 
-        pronsWcodesClean = remove_duplicates(pronsWcodesNew);
+        pronsWcodesClean = remove_duplicate_pronunciations(pronsWcodesNew);
         return pronsWcodesClean;
 
     def lenition_plosive_V(self, word: str, pronsWcodes: list) -> list:
@@ -1583,7 +1583,7 @@ class PronVarGenerator():
                     # print(word + ' :  ' + wordPron.pron + '\t-->\t' + newPron.pron + '\t' + r'[' + inspect.stack()[0][3] + r']');
                     self.ruleCounter['lenition_plosive_V'] += 1
 
-        pronsWcodesClean = remove_duplicates(pronsWcodesNew);
+        pronsWcodesClean = remove_duplicate_pronunciations(pronsWcodesNew);
         return pronsWcodesClean;
 
     def Cx_deletion_coda_V(self, word: str, pronsWcodes: list):
@@ -1628,7 +1628,7 @@ class PronVarGenerator():
                     # print(word + ' :  ' + wordPron.pron + '\t-->\t' + newPron.pron + '\t' + r'[' + inspect.stack()[0][3] + r']');
                     self.ruleCounter['Cx_deletion_coda_V'] += 1
 
-        pronsWcodesClean = remove_duplicates(pronsWcodesNew);
+        pronsWcodesClean = remove_duplicate_pronunciations(pronsWcodesNew);
         return pronsWcodesClean;
 
     def final_n2m_V(self, word: str, pronsWcodes: list):
@@ -1667,7 +1667,7 @@ class PronVarGenerator():
                     # print(word + ' :  ' + wordPron.pron + '\t-->\t' + newPron.pron + '\t' + r'[' + inspect.stack()[0][3] + r']');
                     self.ruleCounter['final_n2m_V'] += 1
 
-        pronsWcodesClean = remove_duplicates(pronsWcodesNew);
+        pronsWcodesClean = remove_duplicate_pronunciations(pronsWcodesNew);
         return pronsWcodesClean;
 
     def bilabial_plosive_deletion_afterbefore_m_V(self, word: str, pronsWcodes: list):
@@ -1712,7 +1712,7 @@ class PronVarGenerator():
                     # print(word + ' :  ' + wordPron.pron + '\t-->\t' + newPron.pron + '\t' + r'[' + inspect.stack()[0][3] + r']');
                     self.ruleCounter['bilabial_plosive_deletion_afterbefore_m_V'] += 1
 
-        pronsWcodesClean = remove_duplicates(pronsWcodesNew);
+        pronsWcodesClean = remove_duplicate_pronunciations(pronsWcodesNew);
         return pronsWcodesClean;
 
     def alveolar_plosive_deletion_afterbefore_n_V(self, word: str, pronsWcodes: list):
@@ -1755,7 +1755,7 @@ class PronVarGenerator():
                     # print(word + ' :  ' + wordPron.pron + '\t-->\t' + newPron.pron + '\t' + r'[' + inspect.stack()[0][3] + r']');
                     self.ruleCounter['alveolar_plosive_deletion_afterbefore_n_V'] += 1
 
-        pronsWcodesClean = remove_duplicates(pronsWcodesNew);
+        pronsWcodesClean = remove_duplicate_pronunciations(pronsWcodesNew);
         return pronsWcodesClean;
 
     def l_vocalisation_V(self, word: str, pronsWcodes: list):
@@ -1866,7 +1866,7 @@ class PronVarGenerator():
                     pronsWcodesNew.append(newPron);
                     # print(f"{word} :  {wordPron.pron}\t-->\t{newPron.pron}\t[{inspect.stack()[0][3]}]");
                     self.ruleCounter['l_vocalisation_V'] += 1
-        pronsWcodesClean = remove_duplicates(pronsWcodesNew);
+        pronsWcodesClean = remove_duplicate_pronunciations(pronsWcodesNew);
         return pronsWcodesClean;
 
     def monoph2schwa_V(self, word: str, pronsWcodes: list) -> list:
@@ -1944,7 +1944,7 @@ class PronVarGenerator():
                         # print(f"{word} :  {wordPron.pron}\t-->\t{newPron.pron}\t[{inspect.stack()[0][3]}]");
                         self.ruleCounter['h_deletion_onset_V'] += 1;
 
-        pronsWcodesClean = remove_duplicates(pronsWcodesNew);
+        pronsWcodesClean = remove_duplicate_pronunciations(pronsWcodesNew);
 
         return pronsWcodesClean;
 
@@ -1971,7 +1971,7 @@ class PronVarGenerator():
                     # print(f"{word} :  {wordPron.pron}\t-->\t{newPron.pron}\t[{inspect.stack()[0][3]}]");
                     self.ruleCounter['wordfinal_plosive_deletion_V'] += 1
 
-        pronsWcodesClean = remove_duplicates(pronsWcodesNew);
+        pronsWcodesClean = remove_duplicate_pronunciations(pronsWcodesNew);
 
         return pronsWcodesClean;
 
