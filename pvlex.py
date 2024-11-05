@@ -2,10 +2,10 @@ import sys
 import os
 import json5 as json
 import numpy as np
-from utils.NewPronVarGenerator import PronVarGenerator
+from pvutils.NewPronVarGenerator import PronVarGenerator
 from g2p import g2p
 import pandas as pd
-from utils.lexicon_utils import *
+from pvutils.pvutils import *
 import re
 
 
@@ -32,7 +32,8 @@ def generate_PV_lexicon(inputLexName, fPath, config={}, wantPVs=True) -> (dict, 
             genpath = sys.path[-1]
             configname = "config.json";
             # print(genpath)
-            fPath = '/'.join([os.path.dirname(sys.path[-1]), "data"]);
+            if fPath == "":
+                fPath = '/'.join([os.path.dirname(sys.path[-1]), "data"]);
             with open('/'.join([genpath, configname]), 'r') as file:
                 # cfg = yaml.safe_load(file);
                 config = json.load(file);
@@ -57,18 +58,20 @@ def generate_PV_lexicon(inputLexName, fPath, config={}, wantPVs=True) -> (dict, 
 
     else:
         # no lexicon found or should be updated, load wordlist and send to g2p for getting canonical pronunciations
-        wordlistName = config["WordListName"]
-        nWords = check_and_prepare_wordlist(fPath, wlName=wordlistName)
+        wordlistNames = config["WordListNames"].split(' ')
+        nWords = check_and_prepare_wordlist(fPath, wlNames=wordlistNames)
 
         # get canonical pronunciations from grapheme-to-phoneme (g2p) conversion tool
-        parser = g2p.parser;
-        print(os.path.join(config["BasePath"], wordlistName))
-        mainLanguage = grasslang2g2plang(cfg["GeneralSettings"]["PronunciationSettings"]["LanguageTagsG2P"],
+        mainLanguage = grasslang2g2plang(config["GeneralSettings"]["PronunciationSettings"]["LanguageTagsG2P"],
                                          config["MainLanguage"])
-        args = parser.parse_args([os.path.join(fPath, wordlistName), '--iform=txt', '--oform=tab',
-                                  '--stress=yes', '--syl=yes', f"--lng={mainLanguage}"])
+        parser = g2p.parser;
+        g2pOutput = ""
         print(f"... using g2p for {mainLanguage} ({nWords} words) ...")
-        g2pOutput = g2p.process(args);
+        for wordlistName in wordlistNames:
+            print(os.path.join(config["BasePath"], wordlistName))
+            args = parser.parse_args([os.path.join(fPath, wordlistName), '--iform=txt', '--oform=tab',
+                                      '--stress=yes', '--syl=yes', f"--lng={mainLanguage}"])
+            g2pOutput += g2p.process(args);
         # postprocess raw g2p output
         lexiconRaw = postprocess_g2p(g2pOutput, fPath, inputLexName);
 
@@ -77,9 +80,9 @@ def generate_PV_lexicon(inputLexName, fPath, config={}, wantPVs=True) -> (dict, 
         loadPath = '/'.join([fPath, "SpecialLexicons"]);
         lexiconRaw = overwrite_pronunciations(config=config, fPath=loadPath, lex=lexiconRaw)
 
-    # write homophone lexicon at this stage
-    lexHomophonesOnly = get_homophones(lexiconRaw);
-    write_homophone_lexicon(lexHomophonesOnly, inputLexName, fPath, nameExtension="Original");
+    # # write homophone lexicon at this stage
+    # lexHomophonesOnly = get_homophones(lexiconRaw);
+    # write_homophone_lexicon(lexHomophonesOnly, inputLexName, fPath, nameExtension="Original");
 
     # initialise which rules should be applied, if any; see config file
     ruleSets = config["GeneralSettings"]["ruleSets"]
@@ -169,6 +172,34 @@ def generate_PV_lexicon(inputLexName, fPath, config={}, wantPVs=True) -> (dict, 
                 if logInfo is not []:
                     logFile.writelines(logInfo);
 
+    # process foreign language words
+    wordlistNames = [fn for fn in os.listdir(fPath) if fn.startswith("wordlist") and fn.endswith(".txt") and not fn.startswith("wordlist_")]
+    # get canonical pronunciations from grapheme-to-phoneme (g2p) conversion tool
+    lexiconAllForeignLangs = {}
+    for wordlistName in wordlistNames:
+        lang = re.sub("wordlist(\w{3}).txt", r"\1", wordlistName)
+        if lang in ["DEU", "DIA", "DEN"]:
+            continue;
+        language = grasslang2g2plang(config["GeneralSettings"]["PronunciationSettings"]["LanguageTagsG2P"],
+                                     lang)
+        parser = g2p.parser;
+        g2pOutput = ""
+        nWords = check_and_prepare_wordlist(fPath, wlNames=[wordlistName])
+        print(f"... using g2p for {language} ({nWords} words) ...")
+        print(os.path.join(config["BasePath"], wordlistName))
+        args = parser.parse_args([os.path.join(fPath, wordlistName), '--iform=txt', '--oform=tab',
+                                  '--stress=yes', '--syl=yes', f"--lng={language}"])
+        g2pOutput += g2p.process(args);
+        # postprocess raw g2p output
+        lexiconForeignLang = postprocess_g2p(g2pOutput, fPath, f"lexicon{lang}.txt");
+        with open(fPath + f"/lexicon{lang}.txt", 'w') as f:
+            for key, val in lexiconForeignLang.items():
+                f.write(f"{key.lower()}\t{val}\n")
+        lexiconAllForeignLangs.update(lexiconForeignLang)
+        with open(fPath + f"/lexiconAllForeignLangs.txt", 'w') as f:
+            for key, val in lexiconAllForeignLangs.items():
+                f.write(f"{key.lower()}\t{val}\n")
+
     # save this lexicon state
     if len(lexiconNew) != len(PVGen.lexiconPVs):
         write_lexicon(lexiconNew, PVGen.lexiconName + addToLexName, fPath, case='lower')
@@ -178,9 +209,10 @@ def generate_PV_lexicon(inputLexName, fPath, config={}, wantPVs=True) -> (dict, 
         # check whether variable is set true to append current special lexicon
         if bool(val["want2add"]) is True:
             fname = val["lexName"];
+            print(fname)
             try:
-                lex = read_lexicon(fname, loadPath);
                 lexName = re.sub(r"__(.*).txt", r"\1", fname);
+                lex = read_lexicon(fname, loadPath);
                 # convert phones of foreign language to their Austrian corresponding pronunciation
                 if key in ["addForeignWords", "addForeignWordsHalbgar"]:
                     lexTmp = convert2austrianPhones(lex);
@@ -190,8 +222,35 @@ def generate_PV_lexicon(inputLexName, fPath, config={}, wantPVs=True) -> (dict, 
                 if logInfo is not []:
                     logFile.writelines(logInfo);
             except FileNotFoundError:
-                print(f"CAUTION: you wanted to {key} but I couldn't find the required file\n"
-                      f"{os.path.join(loadPath, fname)}");
+                # print(f"CAUTION: you wanted to {key} but I couldn't find the required file\n"
+                #       f"{os.path.join(loadPath, fname)}");
+                if key == "addForeignWords":
+                    try:
+                        foreignWordlists = [flang for flang in os.listdir(fPath) if
+                                            re.match(r"^wordlist([A-Z]){3}.txt$", flang) and not re.match(
+                                                r"^wordlist(DEU|DIA|MWE).txt$", flang)]
+                        for foreignWordlist in foreignWordlists:
+                            foreignLang = re.sub(r"^wordlist(([A-Z]){3}).txt$", r"\1", foreignWordlist).lower()
+                            parser = g2p.parser;
+                            g2pOutput = ""
+                            print(f"... using g2p for {foreignLang} ...")
+                            # print(os.path.join(config["BasePath"], foreignWordlist))
+                            args = parser.parse_args([os.path.join(fPath, foreignWordlist), '--iform=txt', '--oform=tab',
+                                                      '--stress=yes', '--syl=yes', f"--lng={foreignLang}"])
+                            g2pOutput += g2p.process(args);
+                            # postprocess raw g2p output
+                            foreignInputLexName = re.sub(r"DEU", f"{foreignLang.upper()}", inputLexName)
+                            lexiconForeign = postprocess_g2p(g2pOutput, fPath, foreignInputLexName);
+                            df = pd.DataFrame.from_dict(lexiconForeign, orient="index")
+                            df.sort_index(inplace=True)
+                            df.to_csv(f"{fPath}/SpecialLexicons/{val['lexName']}", sep='\t', header=False);
+                            lexiconNew, logInfo = merge_lexicons(lexiconNew, lexiconForeign, lexName);
+                    except FileNotFoundError:
+                        print(f"CAUTION: you wanted to {key} but I couldn't find the required file\n"
+                              f"{os.path.join(loadPath, fname)}");
+                else:
+                    print(f"CAUTION: you wanted to {key} but I couldn't find the required file\n"
+                          f"{os.path.join(loadPath, fname)}");
 
     # convert all long vowels to short vowels; if that produced duplicates in the pronunciation, they were thrown
     if bool(config["GeneralSettings"]["convertLong2ShortVowels"]) is True:
@@ -212,7 +271,7 @@ def generate_PV_lexicon(inputLexName, fPath, config={}, wantPVs=True) -> (dict, 
     # write to file
     lexName = strip_file_extension(config["FinalLexiconName"]);
     write_lexicon(lexiconNew, lexName, fPath, case="lower")
-    write_wordlist(lexiconNew, lexName, fPath)
+    write_wordlist_(lexiconNew, lexName, fPath)
     lexHomophonesOnly = get_homophones(lexiconNew);
     write_homophone_lexicon(lexHomophonesOnly, 'lexiconLatest', fPath);
 
@@ -245,6 +304,22 @@ def generate_PV_lexicon(inputLexName, fPath, config={}, wantPVs=True) -> (dict, 
             PoS_DF.to_csv(f"{fPath}/WordLists/PoS_{language}.csv", index=False);
 
     logFile.close();
+
+    # write nonsilence phones
+    with open(f"{fPath}/nonsilence_phones.txt", 'w') as f:
+        allProns = ""
+        for prons in lexiconNew.values():
+            for pron in prons:
+                allProns += pron.pron + ' '
+        phones = list(set(allProns.split(' ')))
+        try:
+            phones.remove(' ')
+        except ValueError:
+            pass;
+        for phone in sorted(phones):
+            if phone != ' ':
+                f.write(phone + '\n')
+
     return lexiconNew, lexName;
 
 

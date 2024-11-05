@@ -1,11 +1,11 @@
 import os
 import re
 from typing import Optional
-from utils.strip_tags import strip_tags
+from pvutils.strip_tags import strip_tags
 import inspect  # for debugging
 import copy
 from collections import OrderedDict
-from utils.Pronunciation import Pronunciation
+from pvutils.Pronunciation import Pronunciation
 
 
 # INFO: REGEXSEARCH IF VARIANTS: [\w]*\t(([\w@:]+\s?)*)\t

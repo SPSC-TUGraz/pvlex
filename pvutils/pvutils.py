@@ -8,7 +8,7 @@ Some useful scripts for handling lexicons for Kaldi.
 # import copy
 # from collections import OrderedDict
 # from utils.Pronunciation import Pronunciation
-from utils.NewPronVarGenerator import *
+from pvutils.NewPronVarGenerator import *
 import inspect
 import re
 # from utils import *
@@ -241,11 +241,10 @@ def read_lexicon(fName: str, fPath="", fEncoding='utf-8') -> dict:
         fPath = os.getcwd();
     lines = open(os.path.join(fPath, fName), 'r', encoding=fEncoding).readlines()
     for line in lines:
-        if len(line.strip().split(r'{}'.format('\t'))) < 2:
+        if len(line.strip().split(r'{}'.format('\t'))) != 2:
             print(r"Check formatting in lexicon for line:\n");
             print(line)
         [key, newVal] = line.strip().split(r'{}'.format('\t'));
-
         # if key exists, don't overwrite all variants!
         if key not in lex:
             newVals = [re.sub(r" +", " ", re.sub(r"[\'\.]", r"", newVal)).strip()];
@@ -254,9 +253,7 @@ def read_lexicon(fName: str, fPath="", fEncoding='utf-8') -> dict:
             if not isinstance(oldVals, list):
                 oldVals = [oldVals];
             newVals = copy.deepcopy(oldVals);
-            if not isinstance(oldVals, list):
-                oldVals = [oldVals];
-            if newVal not in newVals:
+            if re.sub(r"[\'\.]", r"", newVal) not in newVals:
                 newVals.append(re.sub(r" +", " ", re.sub(r"[\'\.]", r"", newVal)).strip());
             else:  # if newVal already in oldVals
                 pass
@@ -411,7 +408,7 @@ def write_lexicon(lexicon: dict, fName="", fPath="", case="", fEncoding='utf-8')
     return;
 
 
-def write_wordlist(lexicon: dict, fName="", fPath="",
+def write_wordlist_(lexicon: dict, fName="", fPath="",
                    fEncoding='utf-8') -> None:
     """
     Write a word list for all word tokens in a lexicon. One word token per line.
@@ -469,23 +466,26 @@ def postprocess_g2p(g2pout: str, fPath, inputLexName) -> dict:
     print(f"saved original g2p output to \n{fPath}/{strip_file_extension(inputLexName)}_g2pout.txt")
     return lexiconRaw;
 
-def check_and_prepare_wordlist(fPath: str, wlName: str) -> int:
+def check_and_prepare_wordlist(fPath: str, wlNames: list) -> int:
     """
     Check whether the word list exists, and remove potential duplicate words. Return number of words in the word list.
     """
     try:
-        with open('/'.join([fPath, wlName]), 'r', encoding='utf-8') as wl:
-            wordList = wl.readlines()
-            wordListNew = list(set(wordList))
-            if len(wordListNew) != len(wordList):
-                with open('/'.join([fPath, wlName + ".bckp"]), 'w', encoding='utf-8') as bckp:
-                    bckp.writelines(sorted(wordList))
-                with open('/'.join([fPath, wlName]), 'w', encoding='utf-8') as wl_no_duplicates:
-                    wl_no_duplicates.writelines(sorted(wordListNew))
+        nwords = 0
+        for wlName in wlNames:
+            with open('/'.join([fPath, wlName]), 'r', encoding='utf-8') as wl:
+                wordList = wl.readlines()
+                wordListNew = list(set(wordList))
+                if len(wordListNew) != len(wordList):
+                    with open('/'.join([fPath, wlName + ".bckp"]), 'w', encoding='utf-8') as bckp:
+                        bckp.writelines(sorted(wordList))
+                    with open('/'.join([fPath, wlName]), 'w', encoding='utf-8') as wl_no_duplicates:
+                        wl_no_duplicates.writelines(sorted(wordListNew))
+            nwords += len(wordListNew)
     except FileNotFoundError:
         raise FileNotFoundError(f"Could not find German wordlist (file {wlName}) in {fPath}.\n"
                                 f"There's nothing I can do for you.")
-    return len(wordListNew);
+    return nwords;
 
 def overwrite_pronunciations(config, fPath, lex):
     """
@@ -506,6 +506,10 @@ def overwrite_pronunciations(config, fPath, lex):
                 for key, val in lex.items():
                     if key in corrLines:
                         lex.update({key: corrLines[key]});
+                        corrLines.pop(key)
+                # # append those words that were not to overwrite in lex but need to be appended
+                # for key, val in corrLines.items():
+                #     lex[key] = corrLines[key];
             except FileNotFoundError:
                 print(f"You wanted to {lexName} pronunciation with manual corrections but no file with\n"
                       f"these corrections could be found ({fNameManCorr}).\nI'll discard that step.")
@@ -741,6 +745,7 @@ def convert2austrianPhones(lexicon: dict, isPronLex=False) -> dict:
             valNew = re.sub("T", "ts", valNew)
             valNew = re.sub("V", "a", valNew)
             valNew = re.sub("A", "a", valNew)
+            valNew = re.sub(" L", " j", valNew)
             valNew = re.sub("H", "u", valNew)  # French [u]
             valNew = re.sub("Q", "O", valNew)  # from English
             valNew = re.sub("e@", "E:6", valNew)

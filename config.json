@@ -1,11 +1,12 @@
 { // input path where wordlists are stored and where files will be saved
-  "BasePath": "C:/Users/kia/Documents/uni/TUGraz/oWork/1Projects/StateOfStudyFair/pvlexicon/data/wordlists", // if empty, cwd
-  "WordListName": "wordlistDEU.txt", // name of wordlist
+//  "BasePath": "C:/Users/kia/Documents/uni/TUGraz/oWork/1Projects/StateOfStudyFair/data/info", // if empty, cwd
+  "BasePath": "C:/Users/kia/Documents/uni/TUGraz/annotationtools/data/info", // if empty, cwd
+  "WordListNames": "wordlistDEU.txt wordlistDIA.txt", // name of wordlists that are German
   "MainLanguage": "DE", // 2do: make used somewhere: it should be possible to set the main corpus language to sth else
   //  "RawGermanLexicon": "lexiconGRASSGermanRaw.txt", // name of the raw input lexicon which contains German words only
   "RawGermanLexicon": "lexiconDEURaw.txt", // name of the raw input lexicon which will contain German words only
-  "OriginalLexiconName": "lexicon_SF.txt", // name of the original corpus lexicon
-//  "OriginalLexiconName": "lexicon_GRASS.txt", // name of the original corpus lexicon
+//  "OriginalLexiconName": "lexicon_SF.txt", // name of the original corpus lexicon
+  "OriginalLexiconName": "lexicon_GRASS.txt", // name of the original corpus lexicon
 //  "OriginalLexiconName": "lexicon_GRASS.txt", // name of the original corpus lexicon
   "FinalLexiconName": "lexiconLatest.txt", // name of the output lexicon
   "GeneralSettings": {
@@ -34,16 +35,22 @@
     "PronunciationSettings": {
       "LanguageTagsG2P": {
         "DE": "deu",
-        "DI": "deu", // Dialect
+        "DIA": "deu", // Dialect
         "DG": "deu", // Dialect
         "DEN": "deu", // Denglish
         "EN": "eng",
-        "HR": "hun",
+        "ENG": "eng",
+        "HU": "hun",
+        "HRV": "cze-CZ", // sic! there's no g2p for BKS languages, this one word is pronunced the same in Czech
         "FR": "fra-FR",
+        "FRA": "fra-FR",
         "IT": "ita",
+        "ITA": "ita",
         "JA": "jpn-JP",
         "PT": "spa-ES",
+        "PRT": "spa-ES",
         "ES": "spa-ES",
+        "ESP": "spa-ES",
         "SV": "swe-SE",
         "L": "deu"
       }
@@ -113,6 +120,10 @@
     // 2do: addSpecialLexicons: true/false
     "LoadPath": "data/SpecialLexicons", // path of special lexicons
     "Lexicons": {
+      "addSilences": {
+      "want2add": 1,
+      "lexName": "__AddSilences.txt"
+      },
       "addBrokenWords": {
       "want2add": 1,
       "lexName": "__BrokenWords.txt"
@@ -128,6 +139,10 @@
       "addForeignWords": {
         "want2add": 1,
         "lexName": "__ForeignWords.txt"
+      },
+      "addDenglishWords": {
+        "want2add": 1,
+        "lexName": "__DenglishWords.txt"
       },
       "addForeignWordsHalbgar": {
         "want2add": 1,
