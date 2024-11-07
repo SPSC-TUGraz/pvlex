@@ -204,10 +204,14 @@ class PronVarGenerator():
         nActiveRules = len(list(filter(lambda elem: elem == True, self.rules.values())));
         nTokens = len(lexiconRaw);
         if self.verboseInfo is True:
-            self.display_verbose_info(self.gen_pron_vars.__name__,
-                                      'generating pronunciation variants ... '
-                                      + 'applying ' + str(nActiveRules) + ' rules to '
-                                      + str(nTokens) + ' tokens ');
+            if nActiveRules == 0:
+                self.display_verbose_info(self.gen_pron_vars.__name__,
+                                          'converting data type of ' + str(nTokens) + ' tokens ');
+            else:
+                self.display_verbose_info(self.gen_pron_vars.__name__,
+                                          'generating pronunciation variants ... '
+                                          + 'applying ' + str(nActiveRules) + ' rules to '
+                                          + str(nTokens) + ' tokens ');
 
         self.lexiconRaw = move_syllable_stress(lexiconRaw);
 
