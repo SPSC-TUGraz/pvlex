@@ -215,7 +215,6 @@ def merge_lexicons(lexiconOld: dict, lexiconNew: dict, lexiconNewName: str, lexi
               "That means, you 'generated' additional lexicon entries. Check that!");
     return lexiconOut, wordsAlreadySeen;
 
-
 def read_lexicon(fName: str, fPath="", fEncoding='utf-8') -> dict:
     """
         This function reads in a dictionary from a textfile of the form
@@ -261,16 +260,15 @@ def read_lexicon(fName: str, fPath="", fEncoding='utf-8') -> dict:
         lex.update({key: list(set(newVals))});
     return lex;
 
-
-def strip(pronRaw: str) -> str:
+def strip(pronRaw: str, keepGlottalStop=False) -> str:
     """
-    This function strips the symbold for syllable boundaries, syllable stress and glottal stops of a pronunciation string.
+    This function strips the symbols for syllable boundaries, syllable stress and glottal stops of a pronunciation string.
     """
-    pronStripped = re.sub(r"\?", r"", pronRaw);
+    if keepGlottalStop is True:
+        pronStripped = re.sub(r"\?", r"", pronRaw);
     pronStripped = re.sub(r"\'", r"", pronStripped);
     pronStripped = re.sub(r" \. ", r" ", pronStripped);
     return pronStripped;
-
 
 def write_lexicon(lexicon: dict, fName="", fPath="", case="", fEncoding='utf-8') -> None:
     """
@@ -407,9 +405,7 @@ def write_lexicon(lexicon: dict, fName="", fPath="", case="", fEncoding='utf-8')
 
     return;
 
-
-def write_wordlist_(lexicon: dict, fName="", fPath="",
-                   fEncoding='utf-8') -> None:
+def write_wordlist_(lexicon: dict, fName="", fPath="", fEncoding='utf-8') -> None:
     """
     Write a word list for all word tokens in a lexicon. One word token per line.
     """
@@ -419,7 +415,7 @@ def write_wordlist_(lexicon: dict, fName="", fPath="",
     return;
 
 def rule_clusters(rule):
-    """ by xenia """
+    """ by xenia. Grouping of rules. """
     plosive_deletions = ['alveolar_plosive_deletion_afterbefore_n_V', 'bilabial_plosive_deletion_afterbefore_m_V',
                          't_deletion_before_plosives_V', 't_delition_in_consonantClusters_V',
                          't_delition_in_sClusters_V',
@@ -519,20 +515,7 @@ def grasslang2g2plang(g2plangs: dict, lang: str) -> str:
     """
     Convert name of language code to its g2p representation.
     """
-        # {"DE": "deu",
-        #         "DG": "deu",
-        #         "EN": "eng",
-        #         "HR": "hun",
-        #         "FR": "fra-FR",
-        #         "IT": "ita",
-        #         "JA": "jpn-JP",
-        #         "PT": "spa-ES",
-        #         "ES": "spa-ES",
-        #         "SV": "swe-SE",
-        #         "L": "deu",
-        #         "DI": "deu",
-        #         "DEN": "deu",
-        #         }
+
     return g2plangs[lang];
 
 def count_rules(rules):
@@ -593,10 +576,9 @@ def write_homophone_lexicon(lexicon: dict, fName: str, fPath="", fEncoding='utf-
           f"- {fileName}__withRules.txt");
     return;
 
-
 def remove_duplicates(lexicon: dict, case="") -> dict:
     """
-        2do: needs to be revised. Currently not needed as apparently no duplicates are produced by my code.
+        2do: Currently not needed as apparently no duplicates are produced by the code.
              However, we could need that one day.
         This method removes duplicates from a lexicon. Duplicates may occur when making keys uppercase.
 
@@ -621,7 +603,6 @@ def remove_duplicates(lexicon: dict, case="") -> dict:
             vals = [vals];
         lex.update({key: vals});
     return lex;
-
 
 def make_case(lexicon: dict, case: str):
     """
@@ -656,7 +637,6 @@ def make_case(lexicon: dict, case: str):
                     lex[newKey].append(val);
 
     return lex;
-
 
 def sort_dict_by_pronunciations(lexicon: dict) -> dict:
     """
@@ -700,7 +680,6 @@ def sort_dict_by_pronunciations(lexicon: dict) -> dict:
 
     return reverseLexicon;
 
-
 def get_homophones(lexicon: dict) -> dict:
     """
     This function returns a dictionary containing all homophones, sorted by pronunciations:
@@ -716,7 +695,6 @@ def get_homophones(lexicon: dict) -> dict:
             lexiconHomophone.update({key: vals});
     sort_regular_dict_by_key(lexiconHomophone);
     return lexiconHomophone;
-
 
 def convert2austrianPhones(lexicon: dict, isPronLex=False) -> dict:
     """
@@ -772,7 +750,6 @@ def convert2austrianPhones(lexicon: dict, isPronLex=False) -> dict:
 
     return lexiconNew;
 
-
 def long2shortVowels(lexicon: dict) -> dict:
     """
     This function converts all long vowels, such as [a:] to short vowels [a].
@@ -791,7 +768,6 @@ def long2shortVowels(lexicon: dict) -> dict:
         lexiconNew.update({key: listWOduplicates});
 
     return lexiconNew;
-
 
 def reduce_phone_set(lexicon: dict, mergePhones: dict) -> dict:
     """
