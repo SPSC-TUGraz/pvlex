@@ -11,7 +11,7 @@
   "FinalLexiconName": "lexiconLatest.txt", // name of the output lexicon
   "GeneralSettings": {
     "updateLexicon": true, // if true, existing lexicons will be ignored/overwritten and the wordlist will be used
-    "want2GenPVs": false, // true: apply rules, false: don't apply rules
+    "want2GenPVs": true, // true: apply rules, false: don't apply rules
     "ruleSets": { // you can switch on/off whole groups of rules here; individual rules are defined below
       "InputSwitchGG2AG": true,
       "ConversationalGeneralGerman": true,

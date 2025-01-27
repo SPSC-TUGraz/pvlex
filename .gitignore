@@ -1,5 +1,9 @@
+# ignore data
+data/
+rule_count.txt
+
+# ignore caches etc. 
 *__pycache__/*
 */__pycache__/*
 .idea/
 __init__.py
-rule_count.txt

@@ -16,9 +16,7 @@ def generate_PV_lexicon(inputLexName, fPath, config={}, wantPVs=True) -> (dict, 
     and optionally:
     - pronunciation variants (PVs),
     - appending additional lexicons,
-    - appending lexicons of other corpora with/without PVs,
     - reduce phone set
-    - create Part-of-Speech (PoS) tags
     ... as defined in the config file.
     """
 
@@ -87,7 +85,6 @@ def generate_PV_lexicon(inputLexName, fPath, config={}, wantPVs=True) -> (dict, 
     ruleSets = config["GeneralSettings"]["ruleSets"]
     rules = init_PV_rules(config['PronunciationVariation'], want2genPVs, ruleSets);
 
-    # 2do: HIER
     # initialise PV generator
     PVGen = PronVarGenerator(lexName=strip_file_extension(config["OriginalLexiconName"]), rules=rules);
     lexPath = '/'.join([fPath, "intermediatelexicons"])
@@ -98,107 +95,12 @@ def generate_PV_lexicon(inputLexName, fPath, config={}, wantPVs=True) -> (dict, 
     PVGen.write_rule_count();
     PVGen.lexiconPVs = PVGen.sort_by_keys()
     # PVGen.lexiconPVs = PVGen.remove_duplicates_from_lexicon(PVGen.lexiconPVs);
-    # PVGen.write_lexicon(nameExtension="_GermanOnly", case=config["GeneralSettings"]["case"]);
 
     # create a fesh copy of the current lexicon, then add others
     lexiconNew = copy.deepcopy(PVGen.lexiconPVs);
     write_lexicon(lexiconNew, f"{PVGen.lexiconName}_", lexPath, case="lower")
     lexHomophonesOnly = get_homophones(lexiconNew);
     write_homophone_lexicon(lexHomophonesOnly, PVGen.lexiconName, lexPath);
-
-    # 2do: probably, we might want to add SOME dictionaries BEFORE PV generation but for the moment I don't do that
-    #      because the special lexicons are lacking syllable information.
-    # add Kiel and/or GECO if configured
-    # addToLexName = "";
-    # for lexName in config["addCorpora"].keys():
-    #     if lexName.startswith('_'):  # skip comments in config file
-    #         continue;
-    #     addToLexName += '&' + lexName;
-    #     if config["addCorpora"][lexName]["want2add"] is True:
-    #         fname = config["addCorpora"][lexName]["fileName"];  # name of lexicon file if present
-    #         try:
-    #             fpath = config["addCorpora"][lexName]["filePath"];
-    #         except KeyError:  # if no extra path defined, search this reps' data path for additional corpus files
-    #             fpath = fPath;
-    #         try:
-    #             lines = open(os.path.join(fpath, fname), 'r', encoding='utf-8').readlines()
-    #             lexTmp = {};
-    #             for line in lines:
-    #                 [k, v] = line.strip().split(r'{}'.format('\t'));
-    #                 lexTmp.update({k: v});
-    #
-    #         except FileNotFoundError:
-    #             fname = config["addCorpora"][lexName]["wordListName"];
-    #             try:
-    #                 lexRawName = f"lexicon_{lexName}_canon.txt";
-    #                 parser = g2p.parser;
-    #                 print(os.path.join(fpath, fname))
-    #                 args = parser.parse_args([os.path.join(fpath, fname), '--iform=txt', '--oform=tab',
-    #                                           '--stress=yes', '--syl=yes', f"--lng=deu"])
-    #                 print(f"... using g2p for {lexName} ...")
-    #                 g2pOutput = g2p.process(args);
-    #                 g2pOutputCrazy = g2pOutput.split('\n');
-    #                 with open(f"{fpath}/{lexRawName}", 'w', encoding='utf-8') as f:
-    #                     for line in sorted(g2pOutputCrazy):
-    #                         if line:
-    #                             f.write('\t'.join(line.split(';')) + '\n');
-    #                 lexTmp = {};
-    #                 with open(f"{fpath}/{lexRawName}", 'r', encoding='utf-8') as f:
-    #                     tmp = f.read().splitlines();
-    #                     for line in tmp:
-    #                         k, v = line.split('\t')
-    #                         lexTmp.update({k: v})
-    #
-    #             except FileNotFoundError:
-    #                 msg = f"\nCAUTION: you wanted to add '{lexName}' words but I couldn't find either \n" + \
-    #                       f"a raw lexicon or a corresponding wordlist here:\n{os.path.join(fpath, fname)}\n" \
-    #                       "so i'll just ignore that and move on\n"
-    #                 logFile.writelines(msg);
-    #                 print(msg);
-    #         finally:
-    #
-    #             rules = init_PV_rules(config['PronunciationVariation'],
-    #                                   bool(config["addCorpora"][lexName]["generatePVs4thisLexicon"]));
-    #             lexName = "lexicon_" + lexName;
-    #             PVGenTmp = PronVarGenerator(lexName=lexName, rules=rules);
-    #             PVGenTmp.lexPath = fPath;
-    #             PVGenTmp.gen_pron_vars(lexTmp);
-    #             PVGenTmp.write_lexicon()
-    #             lexiconNew, logInfo = merge_lexicons(lexiconNew, PVGenTmp.lexiconPVs, lexName)
-    #             if logInfo is not []:
-    #                 logFile.writelines(logInfo);
-
-    # # process foreign language words
-    # wordlistNames = [fn for fn in os.listdir(wlPath) if fn.startswith("wordlist") and fn.endswith(".txt") and not fn.startswith("wordlist_")]
-    # # get canonical pronunciations from grapheme-to-phoneme (g2p) conversion tool
-    # lexiconAllForeignLangs = {}
-    # for wordlistName in wordlistNames:
-    #     lang = re.sub("wordlist(\w{3}).txt", r"\1", wordlistName)
-    #     if lang in ["DEU", "DIA", "DEN"]:
-    #         continue;
-    #     language = grasslang2g2plang(config["GeneralSettings"]["PronunciationSettings"]["LanguageTagsG2P"],
-    #                                  lang)
-    #     parser = g2p.parser;
-    #     g2pOutput = ""
-    #     nWords = check_and_prepare_wordlist(wlPath, wlNames=[wordlistName])
-    #     print(f"... using g2p for {language} ({nWords} words) ...")
-    #     print(os.path.join(config["BasePath"], wordlistName))
-    #     args = parser.parse_args(['/'.join([wlPath, wordlistName]), '--iform=txt', '--oform=tab',
-    #                               '--stress=yes', '--syl=yes', f"--lng={language}"])
-    #     g2pOutput += g2p.process(args);
-    #     # postprocess raw g2p output
-    #     lexiconForeignLang = postprocess_g2p(g2pOutput, wlPath, f"lexicon{lang}.txt");
-    #     with open('/'.join([lexPath, f"lexicon{lang}.txt"]), 'w') as f:
-    #         for key, val in lexiconForeignLang.items():
-    #             f.write(f"{key.lower()}\t{val}\n")
-    #     lexiconAllForeignLangs.update(lexiconForeignLang)
-    #     with open(lexPath + f"/lexiconAllForeignLangs.txt", 'w') as f:
-    #         for key, val in lexiconAllForeignLangs.items():
-    #             f.write(f"{key.lower()}\t{val}\n")
-
-    # # save this lexicon state
-    # if len(lexiconNew) != len(PVGen.lexiconPVs):
-    #     write_lexicon(lexiconNew, PVGen.lexiconName + addToLexName, lexPath, case='lower')
 
     # append manual lexicons
     for key, val in config["SpecialLexicons"]["Lexicons"].items():
@@ -217,31 +119,6 @@ def generate_PV_lexicon(inputLexName, fPath, config={}, wantPVs=True) -> (dict, 
                 if logInfo is not []:
                     logFile.writelines(logInfo);
             except FileNotFoundError:
-                # if key == "addForeignWords":
-                #     try:
-                #         foreignWordlists = [flang for flang in os.listdir(fPath) if
-                #                             re.match(r"^wordlist([A-Z]){3}.txt$", flang) and not re.match(
-                #                                 r"^wordlist(DEU|DIA|MWE).txt$", flang)]
-                #         for foreignWordlist in foreignWordlists:
-                #             foreignLang = re.sub(r"^wordlist(([A-Z]){3}).txt$", r"\1", foreignWordlist).lower()
-                #             parser = g2p.parser;
-                #             g2pOutput = ""
-                #             print(f"... using g2p for {foreignLang} ...")
-                #             # print(os.path.join(config["BasePath"], foreignWordlist))
-                #             args = parser.parse_args(['/'.join([wlPath, foreignWordlist]), '--iform=txt', '--oform=tab',
-                #                                       '--stress=yes', '--syl=yes', f"--lng={foreignLang}"])
-                #             g2pOutput += g2p.process(args);
-                #             # postprocess raw g2p output
-                #             foreignInputLexName = re.sub(r"DEU", f"{foreignLang.upper()}", inputLexName)
-                #             lexiconForeign = postprocess_g2p(g2pOutput, lexPath, foreignInputLexName);
-                #             df = pd.DataFrame.from_dict(lexiconForeign, orient="index")
-                #             df.sort_index(inplace=True)
-                #             df.to_csv(f"{fPath}/SpecialLexicons/{val['lexName']}", sep='\t', header=False);
-                #             lexiconNew, logInfo = merge_lexicons(lexiconNew, lexiconForeign, lexName);
-                #     except FileNotFoundError:
-                #         print(f"CAUTION: you wanted to {key} but I couldn't find the required file\n"
-                #               f"{os.path.join(loadPath, fname)}");
-                # else:
                 print(f"CAUTION: you wanted to {key} but I couldn't find the required file\n"
                       f"{os.path.join(loadPath, fname)}");
 
@@ -269,34 +146,6 @@ def generate_PV_lexicon(inputLexName, fPath, config={}, wantPVs=True) -> (dict, 
     # write homophone lexicon to file
     lexHomophonesOnly = get_homophones(lexiconNew);
     write_homophone_lexicon(lexHomophonesOnly, 'lexiconLatest', lexPath);
-
-    # # 2do: below needs wordlists from annotationtools; so this script should export wordlist itself
-    # # if you want PoS tags, set wantPoS = True
-    # if config["GeneralSettings"]["wantPoS"] is True:
-    #     # filepath = os.path.join(os.path.dirname(os.getcwd()), 'data', 'wordlist_caseSensitive.txt')
-    #     fNames = [fn for fn in os.listdir(wlPath) if fn.startswith("wordlist") and fn.endswith(".txt")];
-    #     for fName in fNames:
-    #         language = grasslang2g2plang(config["GeneralSettings"]["PronunciationSettings"]["LanguageTagsG2P"], re.sub(r"wordlist([A-Z]+)\.txt", r"\1", fName));
-    #         wlFilePath = f"{wlPath}/{fName}";
-    #         parser = g2p.parser;
-    #         args = parser.parse_args([wlFilePath, '--iform=txt', '--oform=extbpfs',
-    #                                   '--stress=yes', '--syl=yes', f"--lng={language}"])
-    #         print('using g2p now, might take a while ...')
-    #         g2pOutput = g2p.process(args);
-    #         g2pOutput = g2pOutput.split('\n');
-    #
-    #         # initialise empty data frame for untangling g2p output
-    #         PoS_DF = pd.DataFrame("", index=np.arange(0, int((len(g2pOutput) - 1) / 6)),
-    #                               columns=["ORT", "KAN", "POS", "KSS", "MRP", "TRL"]);
-    #
-    #         for line in g2pOutput:
-    #             if line:  # ignore empty lines
-    #                 line = line.split(' ', 2);
-    #                 # set this one cell in DF
-    #                 PoS_DF.at[int(line[1]), line[0].strip(':')] = line[2];
-    #
-    #         # write to file
-    #         PoS_DF.to_csv(f"{wlPath}/PoS_{language}.csv", index=False);
 
     logFile.close();
 
