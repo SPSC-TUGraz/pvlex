@@ -272,7 +272,6 @@ class PronVarGenerator():
             myProns = self.bilabial_plosive_deletion_afterbefore_m_V(word, myProns);
             myProns = self.alveolar_plosive_deletion_afterbefore_n_V(word, myProns);
 
-            myProns = self.monoph2schwa_V(word, myProns);
             myProns = self.wordfinal_plosive_deletion_V(word, myProns);
 
             # sicher ist sicher ...
@@ -1872,39 +1871,6 @@ class PronVarGenerator():
                     self.ruleCounter['l_vocalisation_V'] += 1
         pronsWcodesClean = remove_duplicate_pronunciations(pronsWcodesNew);
         return pronsWcodesClean;
-
-    def monoph2schwa_V(self, word: str, pronsWcodes: list) -> list:
-        """
-        This method ... ?
-
-        Parameters
-        ----------
-        word: str
-            only for debugging
-        """
-        if not self.rules['monoph2schwa_V']:
-            return pronsWcodes;
-
-        # if not isinstance(pronsWcodes, list):
-        #     print('2do: exception handling here')
-        # else:
-        #     pronsWcodesNew = copy.deepcopy(pronsWcodes);
-        #     for wordPron in pronsWcodes:
-        #         # <a>(?!<b>) matcht, wenn <a> matcht, aber danach <b> nicht matcht.
-        #         tmpPron = re.sub(r"([^\'])(?![AEIOYU9aeiouy2]) (\. )?([pbtdkgzSZCxNfhjlmnrsv])(.*)", r' @ \2', wordPron.pron);
-        #         tmpPron = tmpPron.strip();
-        #         newPron = Pronunciation(tmpPron, wordPron.rules);
-        #         # if word == "Stunde":
-        #         #     print(newPron.pron)
-        #         if newPron != wordPron:
-        #             newPron.add('monoph2schwa_V');
-        #             pronsWcodesNew.append(newPron);
-        #             # print(f"{word} :  {wordPron.pron}\t-->\t{newPron.pron}\t[{inspect.stack()[0][3]}]");
-        #             self.ruleCounter['monoph2schwa_V'] += 1
-        #
-        # pronsWcodesClean = remove_duplicates(pronsWcodesNew);
-        # return pronsWcodesClean;
-        return pronsWcodes;
 
     def h_deletion_onset_V(self, word: str, pronsWcodes: list):
         """

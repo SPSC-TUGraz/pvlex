@@ -1,13 +1,9 @@
 { // input path where wordlists are stored and where files will be saved
-//  "BasePath": "C:/Users/kia/Documents/uni/TUGraz/oWork/1Projects/StateOfStudyFair/data/info", // if empty, cwd
-  "BasePath": "C:/Users/kia/Documents/uni/TUGraz/annotationtools/data/info", // if empty, cwd
+  "BasePath": "C:/Users/kia/Documents/uni/TUGraz/oWork/1Projects/pvlex/data", // if empty, cwd
   "WordListNames": "wordlistDEU.txt wordlistDIA.txt", // name of wordlists that are German
   "MainLanguage": "DE", // 2do: make used somewhere: it should be possible to set the main corpus language to sth else
-  //  "RawGermanLexicon": "lexiconGRASSGermanRaw.txt", // name of the raw input lexicon which contains German words only
   "RawGermanLexicon": "lexiconDEURaw.txt", // name of the raw input lexicon which will contain German words only
-//  "OriginalLexiconName": "lexicon_SF.txt", // name of the original corpus lexicon
   "OriginalLexiconName": "lexicon_GRASS.txt", // name of the original corpus lexicon
-//  "OriginalLexiconName": "lexicon_GRASS.txt", // name of the original corpus lexicon
   "FinalLexiconName": "lexiconLatest.txt", // name of the output lexicon
   "GeneralSettings": {
     "updateLexicon": true, // if true, existing lexicons will be ignored/overwritten and the wordlist will be used
@@ -29,8 +25,7 @@
           "want2do": true,
           "lexName": "__DenglishWords.txt"
         }
-      },
-
+      }
     },
     "PronunciationSettings": {
       "LanguageTagsG2P": {
@@ -67,7 +62,7 @@
       "I6": "i6",
       "O6": "o6"
     },
-    "wantPoS": false, // true: get Part-of-Speech (PoS) tags for lexical tokens, false: no PoS
+    "wantPoS": false // true: get Part-of-Speech (PoS) tags for lexical tokens, false: no PoS
   },
 
   "PronunciationVariation": { // actual rules for PV generation, grouped as defined in ruleSets above;
@@ -113,11 +108,8 @@
       "schwa_deletion_in_ge_V": 1, // gemacht: g @ m a x t  -->  g m a x t
       "vowel_diphthong_exchange_V": 1 // zwei: ts v aI  --> ts v a:
     },
-    // not yet implemented
-    "monoph2schwa_V": 0
   },
   "SpecialLexicons": { // append additional lexicons with special words, foreign language words, ... (rules are not applied to these tokens)
-    // 2do: addSpecialLexicons: true/false
     "LoadPath": "data/SpecialLexicons", // path of special lexicons
     "Lexicons": {
       "addSilences": {
@@ -156,20 +148,6 @@
         "want2add": true,
         "lexName": "__MultiWordExpressions.txt"
       }
-    }
-  },
-  "addCorpora": { // add wordlist/lexicon (if file is found) of other corpora; optionally create PVs for the new words
-    "Kiel":  { // name of the corpus
-      "want2add": false, // add this corpus
-      "generatePVs4thisLexicon": false, // false: apply PV rules on this corpus; true: don't apply PV rules
-      "fileName": "lexiconKiel.txt", // try to load canonical lexicon
-      "wordListName": "wordListKiel.txt" // if no lexicon found, try to load wordlist
-    },
-    "GECO": {
-      "want2add": false, // add this corpus
-      "generatePVs4thisLexicon": true, // true: apply PV rules on this corpus; false: don't apply PV rules
-      "fileName": "lexiconGECO.txt", // try to load canonical lexicon
-      "wordListName": "wordListGECO.txt" // if no lexicon found, try to load wordlist
     }
   }
 }

@@ -26,7 +26,7 @@ def generate_PV_lexicon(inputLexName, fPath, config={}, wantPVs=True) -> (dict, 
     wlPath = '/'.join([fPath, "wordlists"])
 
     # try to read in configuration if not gives as parameter
-    if not config:
+    if not config: # 2do test this
         try:
             # genpath = "pvlexicon/code"; @Julian: ggf. diese Zeile wieder reinnehmen
             genpath = sys.path[-1]
@@ -43,7 +43,7 @@ def generate_PV_lexicon(inputLexName, fPath, config={}, wantPVs=True) -> (dict, 
 
     want2genPVs = config["GeneralSettings"]["want2GenPVs"];
 
-    # read in raw lexicon, if any
+    # read in raw lexicon, if any # 2do test this
     if config["GeneralSettings"]["updateLexicon"] is False:
         try:
             lines = open('/'.join([fPath, inputLexName]), 'r', encoding='utf-8').readlines()
