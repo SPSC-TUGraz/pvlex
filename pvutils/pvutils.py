@@ -1,17 +1,12 @@
 """
 Created on Mon Feb 01 17:33:01 2021
 Some useful scripts for handling lexicons for Kaldi.
-@author: kia
+@author: swekia
 """
 
-# import os
-# import copy
-# from collections import OrderedDict
-# from utils.Pronunciation import Pronunciation
 from pvutils.NewPronVarGenerator import *
 import inspect
 import re
-# from utils import *
 import pickle
 import pandas as pd
 
