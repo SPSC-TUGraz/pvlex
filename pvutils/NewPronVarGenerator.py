@@ -206,7 +206,7 @@ class PronVarGenerator():
         if self.verboseInfo is True:
             if nActiveRules == 0:
                 self.display_verbose_info(self.gen_pron_vars.__name__,
-                                          'converting data type of ' + str(nTokens) + ' tokens ');
+                                          'converting ' + str(nTokens) + ' tokens ');
             else:
                 self.display_verbose_info(self.gen_pron_vars.__name__,
                                           'generating pronunciation variants ... '

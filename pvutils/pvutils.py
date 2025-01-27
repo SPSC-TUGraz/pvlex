@@ -266,12 +266,15 @@ def strip(pronRaw: str, keepGlottalStop=False) -> str:
     """
     if keepGlottalStop is True:
         pronStripped = re.sub(r"\?", r"", pronRaw);
+    else:
+        pronStripped = pronRaw;
     pronStripped = re.sub(r"\'", r"", pronStripped);
     pronStripped = re.sub(r" \. ", r" ", pronStripped);
     return pronStripped;
 
 def write_lexicon(lexicon: dict, fName="", fPath="", case="", fEncoding='utf-8') -> None:
     """
+    # 2do: remove grouping by xenia
     This method writes two lexicon files:
     - fName.txt: lexicon with lines <key>\t<value>\n (<key> is orthography and <value> pronunciation)
         e.g. drüben	d r y: m
@@ -379,14 +382,7 @@ def write_lexicon(lexicon: dict, fName="", fPath="", case="", fEncoding='utf-8')
                     f1.write(key + '\t' + pron + '\n');
                     f2.write(key + '|' + pron + '|' + ruleset + '\n');
                 phones.extend(pron.split(' '));
-        # xenia ...
-        lexicon_data_by_word['all_rules_in_lexicon'] = all_rules
-        # with open('csv_filename.csv', 'a') as f:
-        #     csv_matrix.to_csv(f, header=f.tell() == 0, index=False)
-        # save data structure into file
-        with open(f'{fPath}/lexicon_dict_{fileName}_lexicon_data_by_word.npy', 'wb') as f:
-            pickle.dump(lexicon_data_by_word, f)
-        # ... xenia
+
     print('Lexicon saved to %s as \'%s.txt\'' % (fPath, fileName));
     print('Lexicon with rules saved to %s as \'%s\'' % (fPath, fileName + '__withRules.txt'));
     with open(f"{fPath}/nonsilence_phones.txt", 'w',

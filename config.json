@@ -11,11 +11,11 @@
   "FinalLexiconName": "lexiconLatest.txt", // name of the output lexicon
   "GeneralSettings": {
     "updateLexicon": true, // if true, existing lexicons will be ignored/overwritten and the wordlist will be used
-    "want2GenPVs": 1, // 1: apply rules, 0: don't apply rules
+    "want2GenPVs": false, // true: apply rules, false: don't apply rules
     "ruleSets": { // you can switch on/off whole groups of rules here; individual rules are defined below
-      "InputSwitchGG2AG": 1,
-      "ConversationalGeneralGerman": 1,
-      "ConversationalAustrianGerman": 1
+      "InputSwitchGG2AG": true,
+      "ConversationalGeneralGerman": true,
+      "ConversationalAustrianGerman": true
     },
     "case": "lower", // lowercase final lexicon
     "overwritePronunciations": {
@@ -56,8 +56,8 @@
       }
     },
     // 2do: glottal stop yes/no
-    "convertLong2ShortVowels": 1, // 1: long vowels like [a:] are transformed to short ones [a] AFTER PV generation
-    "reducePhoneSet": 1, // 1: merge specific phones as defined in PhoneSetMinimisation (key is replaced with value)
+    "convertLong2ShortVowels": true, // true: long vowels like [a:] are transformed to short ones [a] AFTER PV generation
+    "reducePhoneSet": true, // true: merge specific phones as defined in PhoneSetMinimisation (key is replaced with value)
     "PhoneSetMinimisation": {
       "Y6": "y6",
       "r": "R",
@@ -67,7 +67,7 @@
       "I6": "i6",
       "O6": "o6"
     },
-    "wantPoS": 0, // 1: get Part-of-Speech (PoS) tags for lexical tokens, 0: no PoS
+    "wantPoS": false, // true: get Part-of-Speech (PoS) tags for lexical tokens, false: no PoS
   },
 
   "PronunciationVariation": { // actual rules for PV generation, grouped as defined in ruleSets above;
@@ -121,53 +121,53 @@
     "LoadPath": "data/SpecialLexicons", // path of special lexicons
     "Lexicons": {
       "addSilences": {
-      "want2add": 1,
+      "want2add": true,
       "lexName": "__AddSilences.txt"
       },
       "addBrokenWords": {
-      "want2add": 1,
+      "want2add": true,
       "lexName": "__BrokenWords.txt"
       },
       "addDialectWords": {
-        "want2add": 1,
+        "want2add": true,
         "lexName": "__ManualDialectExotic.txt"
       },
       "addAblautImPraesens": {
-        "want2add": 1,
+        "want2add": true,
         "lexName": "__AblautImPraesens.txt"
       },
       "addForeignWords": {
-        "want2add": 1,
+        "want2add": true,
         "lexName": "__ForeignWords.txt"
       },
       "addDenglishWords": {
-        "want2add": 1,
+        "want2add": true,
         "lexName": "__DenglishWords.txt"
       },
       "addForeignWordsHalbgar": {
-        "want2add": 1,
+        "want2add": true,
         "lexName": "__ForeignWordsHalbgar.txt"
       },
       "addAphabet": {
-        "want2add": 1,
+        "want2add": true,
         "lexName": "__SpellingAlphabet.txt"
       },
       "addMultiWords": {
-        "want2add": 1,
+        "want2add": true,
         "lexName": "__MultiWordExpressions.txt"
       }
     }
   },
   "addCorpora": { // add wordlist/lexicon (if file is found) of other corpora; optionally create PVs for the new words
     "Kiel":  { // name of the corpus
-      "want2add": 0, // add this corpus
-      "generatePVs4thisLexicon": 1, // 1: apply PV rules on this corpus; 0: don't apply PV rules
+      "want2add": false, // add this corpus
+      "generatePVs4thisLexicon": false, // false: apply PV rules on this corpus; true: don't apply PV rules
       "fileName": "lexiconKiel.txt", // try to load canonical lexicon
       "wordListName": "wordListKiel.txt" // if no lexicon found, try to load wordlist
     },
     "GECO": {
-      "want2add": 0, // add this corpus
-      "generatePVs4thisLexicon": 1, // 1: apply PV rules on this corpus; 0: don't apply PV rules
+      "want2add": false, // add this corpus
+      "generatePVs4thisLexicon": true, // true: apply PV rules on this corpus; false: don't apply PV rules
       "fileName": "lexiconGECO.txt", // try to load canonical lexicon
       "wordListName": "wordListGECO.txt" // if no lexicon found, try to load wordlist
     }
