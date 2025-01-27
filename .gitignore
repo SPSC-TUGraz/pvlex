@@ -1,2 +1,5 @@
-*/__pycache__*
+*__pycache__/*
+*/__pycache__/*
 .idea/
+__init__.py
+rule_count.txt
