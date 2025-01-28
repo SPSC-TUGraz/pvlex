@@ -7,7 +7,6 @@ Some useful scripts for handling lexicons for Kaldi.
 from pvutils.NewPronVarGenerator import *
 import inspect
 import re
-import pickle
 import pandas as pd
 
 
@@ -269,7 +268,6 @@ def strip(pronRaw: str, keepGlottalStop=False) -> str:
 
 def write_lexicon(lexicon: dict, fName="", fPath="", case="", fEncoding='utf-8') -> None:
     """
-    # 2do: remove grouping by xenia
     This method writes two lexicon files:
     - fName.txt: lexicon with lines <key>\t<value>\n (<key> is orthography and <value> pronunciation)
         e.g. drüben	d r y: m

@@ -174,13 +174,6 @@ class PronVarGenerator():
         """
         This method performs deletions/substitutions of phones and adds pronunciation variants
         according to Austrian German Conversational Speech pronunciation rules, as described in
-        
-        @inproceedings{schuppler2014pronunciation,
-          title={Pronunciation variation in read and conversational Austrian German},
-          author={Schuppler, Barbara and Adda-Decker, Martine and Morales-Cordovilla, Juan A},
-          booktitle={Fifteenth Annual Conference of the International Speech Communication Association},
-          year={2014}
-          }
 
         the suffix "_V" means that this rule adds a variant,
         the suffix "_R" means that this rule replaces the old version
@@ -199,7 +192,6 @@ class PronVarGenerator():
 
         Returns
         -------
-
         """
         nActiveRules = len(list(filter(lambda elem: elem == True, self.rules.values())));
         nTokens = len(lexiconRaw);
@@ -245,8 +237,6 @@ class PronVarGenerator():
             myProns = self.ge_deletion_sibilantAffricates_V(word, myProns);
             myProns = self.ge_deletion_plosives_V(word, myProns);
             # ------------------
-
-            # 2do: sort hierarchically; started already but unclear whether all considered
             myProns = self.schwa_deletion_in_ge_V(word, myProns);
 
             myProns = self.schwa_deletion_unstressed_closedsyllable_V(word, myProns);
@@ -504,7 +494,6 @@ class PronVarGenerator():
         pronsWcodesClean  :  list
             Like input 'pronsWcodes', but updated if rule applied.
             Possible duplicates in PVs are removed but rule set is kept.
-
         """
         if not self.rules['rC2rx_V']:
             return pronsWcodes;
@@ -569,7 +558,6 @@ class PronVarGenerator():
         -------
         pronsWcodesClean : list
             list with new variants
-
         """
         if not self.rules['full_vowel_substitution_V']:
             return pronsWcodes;
@@ -674,12 +662,10 @@ class PronVarGenerator():
         Parameters
         ----------
 
-
         Returns
         -------
         pronsWcodesClean : list
             list with new variants
-
         """
         if not self.rules['vowel_diphthong_exchange_V']:
             return pronsWcodes;
@@ -765,7 +751,6 @@ class PronVarGenerator():
         pronsWcodesClean  :  list
             Like input 'pronsWcodes', but updated if rule applied.
             Possible duplicates in PVs are removed but rule set is kept.
-
         """
         if not self.rules['schwa_deletion_before_n_V']:
             return pronsWcodes;
@@ -837,7 +822,6 @@ class PronVarGenerator():
         Returns
         -------
         word_pron_list_new  :  list
-
         """
 
         if not self.rules['schwa_deletion_unstressed_opensyllable_V']:
@@ -890,7 +874,6 @@ class PronVarGenerator():
         Returns
         -------
         word_pron_list_new  :  list
-
         """
         if not self.rules['schwa_deletion_unstressed_closedsyllable_V']:
             return pronsWcodes;
@@ -984,7 +967,6 @@ class PronVarGenerator():
         Returns
         -------
         pronsWcodesClean  :  list
-
         """
         if not self.rules['ge_deletion_sibilantAffricates_V']:
             return pronsWcodes;
@@ -1011,7 +993,7 @@ class PronVarGenerator():
 
     def gn2N_V(self, word: str, pronsWcodes: list):
         """
-        2do: this is one of multiple nasal assimilations. merge functions
+        2do: this is one of multiple nasal assimilations. could be merged.
         This function adds variant if orthography contains "gn"
 
         elektromagnetische: e l E k t r o m a g n e: t I S @	 -> e l E k t r o m a N n e: t I S @
@@ -1026,7 +1008,6 @@ class PronVarGenerator():
         Returns
         -------
         word_pron_list_new  :  list
-
         """
         if not self.rules['gn2N_V']:
             return pronsWcodes;
@@ -1054,7 +1035,7 @@ class PronVarGenerator():
 
     def gschwan2N_V(self, word: str, pronsWcodes: list):
         """
-        2do: this is one of multiple nasal assimilations. merge functions
+        2do: this is one of multiple nasal assimilations. could be merged.
         This function replaces g @ n with N if within one syllable.
 
         tragen :  t r a: g @ n  -->  't r a: N
@@ -1069,7 +1050,6 @@ class PronVarGenerator():
         Returns
         -------
         word_pron_list_new  :  list
-
         """
         if not self.rules['gschwan2N_V']:
             return pronsWcodes;
@@ -1093,7 +1073,7 @@ class PronVarGenerator():
 
     def Nschwan2N_V(self, word: str, pronsWcodes: list):
         """
-        2do: this is one of multiple nasal assimilations. merge functions
+        2do: this is one of multiple nasal assimilations. could be merged.
         This function replaces N @ n with N.
 
         aufgegangen :  'aU f g @ g a N @ n  -->  'aU f g @ g a N
@@ -1108,7 +1088,6 @@ class PronVarGenerator():
         Returns
         -------
         word_pron_list_new  :  list
-
         """
         if not self.rules['Nschwan2N_V']:
             return pronsWcodes;
@@ -1132,7 +1111,7 @@ class PronVarGenerator():
 
     def nm2m_V(self, word: str, pronsWcodes: list):
         """
-        2do: this is one of multiple nasal assimilations. merge functions
+        2do: this is one of multiple nasal assimilations. could be merged.
         This function replaces n m with m. Occurs after schwa deletion before n.
 
         deinem:     d aI n m  -->  d aI m
@@ -1148,7 +1127,6 @@ class PronVarGenerator():
         -------
         pronsWcodesClean  :  list of Pronunciation objects
             with new pronunciations if rule applied to word
-
         """
         if not self.rules['nm2m_V']:
             return pronsWcodes;
@@ -1190,7 +1168,6 @@ class PronVarGenerator():
         Returns
         -------
         pronsWcodesClean  :  list
-
         """
         if not self.rules['r_deletion_coda_R']:
             return pronsWcodes;
@@ -1218,61 +1195,13 @@ class PronVarGenerator():
                     pronsWcodesNew.append(newPron);
                     # print(f"{word} :  {wordPron.pron}\t-->\t{newPron.pron}\t[{inspect.stack()[0][3]}]");
                     self.ruleCounter['r_deletion_coda_R'] += 1
-                # if newPron != wordPron:
-                #     newPron.add('r_deletion_syllablefinal_R');
-                #     pronsWcodesNew.append(newPron);
-                #     self.ruleCounter['r_deletion_syllablefinal_R'] += 1
-                #     # print(f"{word} :  {wordPron.pron}\t-->\t{newPron.pron}\t[{inspect.stack()[0][3]}]");
 
         pronsWcodesNew = remove_illegal_neighbourhood(word, pronsWcodesNew, 'r_deletion_coda_R');
         pronsWcodesClean = remove_duplicate_pronunciations(pronsWcodesNew);
         return pronsWcodesClean;
 
-    # def r_deletion_coda_R(self, word: str, pronsWcodes: list) -> list:
-    #     """
-    #     2do: Do I want to replace a:6 or a6, too? They do only occur four times
-    #     This function deletes r in front of one of the following consonants
-    #     [pbtdkgfvSZxCGhnml] which are followed by a syllable boundary or the end
-    #     of a word (coda) if it is preceeded by A, a, A: or a:
-    #
-    #     Arm: a: r m  -->  a: m
-    #
-    #     Parameters
-    #     ----------
-    #     word : str
-    #         current word
-    #     pronsWcodes  :  list
-    #         list with pronunciations for word
-    #
-    #     Returns
-    #     -------
-    #     pronsWcodesClean  :  list
-    #
-    #     """
-    #     if not self.rules['r_deletion_coda_R']:
-    #         return pronsWcodes;
-    #
-    #     if not isinstance(pronsWcodes, list):
-    #         print('2do: exception handling here')
-    #     else:
-    #         pronsWcodesNew = copy.deepcopy(pronsWcodes);
-    #         for wordPron in pronsWcodes:
-    #             # in any case: add ':' to keep syllable weight
-    #             tmpPron = re.sub(r"([Aa]):? r ([pbtdkgfvSZxCGhnml])$", r"a: \2", wordPron.pron);
-    #             tmpPron = tmpPron.strip();
-    #             newPron = Pronunciation(tmpPron, wordPron.rules);
-    #             if newPron != wordPron:
-    #                 newPron.add('r_deletion_coda_R');
-    #                 pronsWcodesNew.append(newPron);
-    #                 self.ruleCounter['r_deletion_coda_R'] += 1
-    #                 # print(f"{word} :  {wordPron.pron}\t-->\t{newPron.pron}\t[{inspect.stack()[0][3]}]");
-    #
-    #     pronsWcodesClean = remove_duplicates(pronsWcodesNew);
-    #     return pronsWcodesClean;
-
     def r_substitution_coda_R(self, word: str, pronsWcodes: list) -> list:
         """
-            check.
             This function substitutes r by 6 if followed by a syllable boundary or
             the end of a word (coda) and preceeded by one of the following vowels
             [EIOYU9eiouy2@]
@@ -1320,55 +1249,6 @@ class PronVarGenerator():
         pronsWcodesClean = remove_duplicate_pronunciations(pronsWcodesNew);
         return pronsWcodesClean;
 
-    # def r_substitution_beforeconsonant_R(self, word: str, pronsWcodes: list) -> list:
-    #     """
-    #     check.
-    #     This method substitues "r's" which are followed by specific consontants
-    #     at a syllable boundary or the end of a word (coda).
-    #
-    #     angebohrt:  a n g @ b o: r t  -->  a n g @ b o: 6 t
-    #
-    #     Parameters
-    #     ----------
-    #     word: str
-    #         current word
-    #     pronsWcodes: list
-    #         list with all pron vars so far
-    #
-    #     Returns
-    #     -------
-    #     list
-    #         all former and new pron vars
-    #
-    #     """
-    #     if not self.rules['r_substitution_beforeconsonant_R']:
-    #         return pronsWcodes;
-    #
-    #     if not isinstance(pronsWcodes, list):
-    #         print('2do: exception handling here')
-    #     else:
-    #         pronsWcodesNew = copy.deepcopy(pronsWcodes);
-    #         for wordPron in pronsWcodes:
-    #             # tmpPron = re.sub(r"([^a])(:)? r ([pbtdkgfvSZxCGhnml]) \.", r"6 \1 .", wordPron.pron);
-    #             tmpPron = re.sub(r"([^a])(:)? r ([pbtdkgfvSZxCGhnml])($| \.)", r"\1\2 6 \3\4", wordPron.pron);
-    #             tmpPron = re.sub(r"a(:)? 6", r"a\1", tmpPron);
-    #             tmpPron = tmpPron.strip();
-    #             newPron = Pronunciation(tmpPron, 'r_substitution_beforeconsonant_R');
-    #             if newPron != wordPron:
-    #                 # make sure to overwrite canonical variant (don't keep both versions)
-    #                 if wordPron.rules == "canon":
-    #                     pronsWcodesNew.remove(wordPron)
-    #                     newPron.replace(newPron.pron.strip(), 'r_substitution_beforeconsonant_R');
-    #                 else:
-    #                     newPron.rules = '|'.join([wordPron.rules, newPron.rules])
-    #
-    #                 pronsWcodesNew.append(newPron);
-    #                 print(f"{word} :  {wordPron.pron}\t-->\t{newPron.pron}\t[{inspect.stack()[0][3]}]");
-    #                 self.ruleCounter['r_substitution_beforeconsonant_R'] += 1
-    #
-    #     pronsWcodesClean = remove_duplicates(pronsWcodesNew);
-    #     return pronsWcodesClean;
-
     def t_delition_in_sClusters_V(self, word: str, pronsWcodes: list):
         """
         This function deletes the t in st followed by consonants and deletes t in ts preceeded by consonants.
@@ -1385,7 +1265,6 @@ class PronVarGenerator():
         Returns
         -------
         word_pron_list_new  :  list
-
         """
         if not self.rules['t_delition_in_sClusters_V']:
             return pronsWcodes;
@@ -1433,7 +1312,6 @@ class PronVarGenerator():
         Returns
         -------
         word_pron_list_new  :  list
-
         """
         if not self.rules['t_delition_in_consonantClusters_V']:
             return pronsWcodes;
@@ -1473,7 +1351,6 @@ class PronVarGenerator():
         Returns
         -------
         word_pron_list_new  :  list
-
         """
         if not self.rules['t_deletion_before_plosives_V']:
             return pronsWcodes;
@@ -1511,7 +1388,6 @@ class PronVarGenerator():
         Returns
         -------
         word_pron_list_new  :  list
-
         """
         if not self.rules['carryover_assimilation_plosives_V']:
             return pronsWcodes;
@@ -1541,7 +1417,6 @@ class PronVarGenerator():
 
     def lenition_plosive_V(self, word: str, pronsWcodes: list) -> list:
         """
-        check.
         2do: beautify
         2do: update docu
         This function substitutes the plosives t, p and b to d, b and v.
@@ -1558,7 +1433,6 @@ class PronVarGenerator():
         Returns
         -------
         word_pron_list_new  :  list
-
         """
         if not self.rules['lenition_plosive_V']:
             return pronsWcodes;
@@ -1611,7 +1485,6 @@ class PronVarGenerator():
         Returns
         -------
         word_pron_list_new  :  list
-
         """
 
         if not self.rules['Cx_deletion_coda_V']:
@@ -1651,7 +1524,6 @@ class PronVarGenerator():
         Returns
         -------
         word_pron_list_new  :  list
-
         """
         if not self.rules['final_n2m_V']:
             return pronsWcodes;
@@ -1692,7 +1564,6 @@ class PronVarGenerator():
         Returns
         -------
         word_pron_list_new  :  list
-
         """
         if not self.rules['bilabial_plosive_deletion_afterbefore_m_V']:
             return pronsWcodes;
@@ -1737,7 +1608,6 @@ class PronVarGenerator():
         Returns
         -------
         word_pron_list_new  :  list
-
         """
         if not self.rules['alveolar_plosive_deletion_afterbefore_n_V']:
             return pronsWcodes;
@@ -1812,7 +1682,6 @@ class PronVarGenerator():
         Returns
         -------
         word_pron_list_new  :  list
-
         """
         if not self.rules['l_vocalisation_V']:
             return pronsWcodes;
@@ -1890,7 +1759,6 @@ class PronVarGenerator():
         Returns
         -------
         word_pron_list_new  :  list
-
         """
         if not self.rules['h_deletion_onset_V']:
             return pronsWcodes;
@@ -1921,7 +1789,6 @@ class PronVarGenerator():
     def wordfinal_plosive_deletion_V(self, word: str, pronsWcodes: list) -> list:
         """
         ... CONTEXT RULE!!! does only make sense with a subsequent word.
-
         """
         if not self.rules['wordfinal_plosive_deletion_V']:
             return pronsWcodes;
@@ -1942,7 +1809,6 @@ class PronVarGenerator():
                     self.ruleCounter['wordfinal_plosive_deletion_V'] += 1
 
         pronsWcodesClean = remove_duplicate_pronunciations(pronsWcodesNew);
-
         return pronsWcodesClean;
 
     # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -1988,7 +1854,6 @@ class PronVarGenerator():
         Returns
         -------
         lexiconClean : clean version of lexicon
-
         """
         # 2do: change crappy replacement to something with less repetition
         # if not bool(lexiconBefore):
@@ -2016,6 +1881,9 @@ class PronVarGenerator():
         return self.lexiconPVs;
 
     def write_rule_count(self):
+        """
+        Export file with counts how often which rule was applied.
+        """
         with open(os.path.join(self.lexPath, 'rule_count.txt'), 'w', encoding='utf-8') as f:
             for key, val in self.ruleCounter.items():
                 f.write(key + '\t' + str(val) + '\n');
@@ -2024,6 +1892,9 @@ class PronVarGenerator():
         return;
 
     def write_lexicon(self, case="", nameExtension=""):
+        """
+        Export
+        """
         if case != '':
             fileName = self.lexiconName + '_' + case;
         else:
