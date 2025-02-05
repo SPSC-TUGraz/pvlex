@@ -21,7 +21,7 @@ If you use our code or data in your research, please cite this repository:
 	howpublished = {\url{https://github.com/SPSC-TUGraz/pvlex}}
 }
 ```
-and the article: 
+and the article that contains details about some of the general rules used in this code: 
 ```
 @InProceedings{schuppler2014pronunciation,
   author    = {Schuppler, Barbara and Adda-Decker, Martine and Morales-Cordovilla, Juan A},
