@@ -6,16 +6,19 @@ Create a wordlist with the words that you want to process (one word per line). C
 
 Note: If you want to use your own version of a canonical pronunciation lexicon, you can configure **2do** in the configuration file. Otherwise, you will need an internet connection for accessing the integrated online service to create canonical pronunciations (in this case, please cite [BAS Web Services Grapheme-to-phoneme-conversion tool](https://clarin.phonetik.uni-muenchen.de/BASWebServices/interface/Grapheme2Phoneme) as well). 
 
-If you want to create pronunciation variants with the typical reductions for standar German (as spoken in Germany), set the configurations in the section **2do** to **want2do=False**. 
+If you want to create pronunciation variants with the typical reductions for standar German (as spoken in Germany), set the configuration `ConversationalAustrianGerman` to `false` in the section `GeneralSettings>ruleSets`. 
 
 ## How to cite 
-2do 
+
 If you use our code or data in your research, please cite this repository:
 ```
 @misc{wepner2024pvlex
 	author  = {Wepner, Saskia},
 	title   = {pvlex -- Lexicon with Pronunciation Variants for (Austrian) German Conversatinal Speech},
-	year    = 2024
+	year    = 2024,
+	publisher = {GitHub},
+	journal = {GitHub repository},
+	howpublished = {\url{https://github.com/SPSC-TUGraz/pvlex}}
 	...
 }
 ```
