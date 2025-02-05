@@ -19,7 +19,6 @@ If you use our code or data in your research, please cite this repository:
 	publisher = {GitHub},
 	journal = {GitHub repository},
 	howpublished = {\url{https://github.com/SPSC-TUGraz/pvlex}}
-	...
 }
 ```
 and the article: 
