@@ -1,9 +1,9 @@
 { // input path where wordlists are stored and where files will be saved
-  "BasePath": "C:/Users/kia/Documents/uni/TUGraz/oWork/1Projects/pvlex/data", // if empty, cwd
-  "WordListNames": "wordlistDEU.txt wordlistDIA.txt", // name of wordlists that are German
-  "MainLanguage": "DE", // 2do: make used somewhere: it should be possible to set the main corpus language to sth else
-  "RawGermanLexicon": "lexiconDEURaw.txt", // name of the raw input lexicon which will contain German words only
-  "OriginalLexiconName": "lexicon_GRASS.txt", // name of the original corpus lexicon
+  "BasePath": "data", // if empty, cwd
+  "WordListNames": "wordlistDEU.txt wordlistDIA.txt", // name of wordlists that are German; must lie in <BasePath>/wordlists
+  "MainLanguage": "DE", // set main language of your data (rules below only make sense for German, but if you want to experiment, go ahead)
+  "RawGermanLexicon": "lexiconDEURaw.txt", // [optional] name of the raw input lexicon if you want to use your own
+  "OriginalLexiconName": "lexicon_GRASS.txt", // name of the original corpus lexicon (for info only)
   "FinalLexiconName": "lexiconLatest.txt", // name of the output lexicon
   "GeneralSettings": {
     "updateLexicon": true, // if true, existing lexicons will be ignored/overwritten and the wordlist will be used
@@ -50,7 +50,6 @@
         "L": "deu"
       }
     },
-    // 2do: glottal stop yes/no
     "convertLong2ShortVowels": true, // true: long vowels like [a:] are transformed to short ones [a] AFTER PV generation
     "reducePhoneSet": true, // true: merge specific phones as defined in PhoneSetMinimisation (key is replaced with value)
     "PhoneSetMinimisation": {
@@ -66,14 +65,14 @@
   },
 
   "PronunciationVariation": { // actual rules for PV generation, grouped as defined in ruleSets above;
-                              // short description via example below, detailed description in ... 2do!
+                              // short description via example below
     "InputSwitchGG2AG": { // replace(!) German German (GG) standard pronunciation with Austrian German (AG) standard
       "finalC_as_k_R": 1, // richtig: R I C t I C  -->  R I C t I k
       "medialC_as_k_V": 1, // belustigt: R I C t I C  -->  R I C t I k
       "voiced2unvoiced_s_R": 1, // sicher: z I C E6  -->  s I C E6
       "rC2rx_V": 1, // Kirchen: k I6 C @ n  -->  k I6 x @ n
       "wordinitial_che_chi2ke_ki_R": 1, // china:  C i: n a:  -->  k i: n a:
-      "wordinitial_closed_U_R": 1 // Uni:  U n i:  -->  u: n i: (wenn u betont; z.B. NICHT "Umgebung") <- 2do: richtig?
+      "wordinitial_closed_U_R": 1 // Uni:  U n i:  -->  u: n i:
     },
 
     // rules that hold for conversational speech (CS): reductions, substitutions, ...

@@ -1,6 +1,8 @@
-# ignore data
-data/
+# ignore some data
+data/intermediateLexicons
+data/PVGenerationAndWordsAlreadySeen.log
 rule_count.txt
+
 
 # ignore caches etc. 
 *__pycache__/*
