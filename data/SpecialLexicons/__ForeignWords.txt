@@ -1,0 +1,800 @@
+a	eI
+abbys	@ . b I z
+afghan	{ f . g { n
+african	{ . f r I . k @ n
+airport	e@ . p O: t
+al	eI . e l
+amazon	{ . m @ . z Q n
+angelos	{ N . l @U z
+appleton	{ . p l @ . t @ n
+aquaponics	{ k . w U . p Q . n I k s
+arthurs	A: . T 3: z
+atlas	{ t . l @ s
+b	b i:
+babysitten	b eI . b I . s I . t @ n
+baileys	b eI . l I z
+bands	b { n d z
+bang	b { N
+barbara	b A: . b A: . r @
+bargain	b A: . g I n
+bartstation	b A: t . s t eI . S @ n
+bay	b eI
+baywatch	b e . w Q tS
+beats	b i: t s
+ben	b e n
+big	b I g
+bilingualism	b aI . l I N . g w @ . l I . z @ m
+bill	b I l
+bit	b I t
+black	b l { k
+blackjack	b l { k . dZ { k
+blues	b l u: z
+bob	b Q b
+boots	b u: t s
+booze	b u: z
+borderlands	b O: . d @ . l { n d z
+buffet	b U . f eI
+burger	b 3: . g @
+burner	b 3: . n @
+byte	b aI t
+c	s i:
+cablecar	k eI . b @ l . k A:
+californication	k { . l I . f O: . n I . k eI . S @ n
+call	k O: l
+carport	k A: . p O: t
+cassidy	k { . s I . d I
+center	s e n . t @
+chargepump	tS A: dZ . p V m p
+chicago	S I . k A: . g @U
+chief	tS i: f
+chilli	tS I . l I
+chinese	tS aI . n i: z
+chowder	tS aU . d @
+chris	k r I s
+cinema	s I . n @ . m @
+citizen	s I . t I . z @ n
+clam	k l { m
+classic	k l { . s I k
+clinton	k l I n . t @ n
+cloud	k l aU d
+club	k l V b
+clubs	k l V b z
+cocktail	k Q k . t eI l
+cocktailpartyroom	k Q k . t eI l . p A: . t I . r U m
+code	k @U d
+columbo	k @ . l V m . b @U
+computer	k @ m . p j u: . t @
+connections	k @ . n e k . S @ n z
+controller	k @ n . t r @U . l @
+coolpacks	k u: l . p eI k s
+coronado	k Q . r @ . n A: . d @U
+corthotel	k O: t . f @ . t @ l
+country	k V n . t r I
+countrybands	k V n . t r I . b { n d z
+cowboy	k aU . b OI
+crusade	k r u: . s eI d
+cs	s i: . e s
+d	d i:
+defaults	d I . f Q l t s
+defiance	d I . f aI . @ n s
+del	d I . l i: t
+denver	d e n . v @
+desert	d I . z 3: t
+design	d I . z aI n
+diego	d aI . g @U
+dillon	d I . l @ n
+dinner	d I . n @
+distance	d I . s t @ n s
+django	dZ { n . g @U
+dollar	d Q . l @
+dollarstore	d Q . l @ . s t O:
+doodle	d u: . d @ l
+download	d aU n . l @U d
+downtown	d aU n . t aU n
+duke	d j u: k
+dwight	d w aI t
+e-mail	i: . m eI l
+e-mails	i: . m eI l z
+end	e n d
+english	I N . g l I S
+entertainment	e n . t @ . t eI n . m @ n t
+equipment	I . k w I p . m @ n t
+event	I . v e n t
+events	I . v e n t s
+facebook	f eI s . b U k
+fame	f eI m
+familiy	f { m . l I
+family	f { m . l I
+fan	f { n
+fantasy	f { n . t @ . s I
+features	f i: . tS @ z
+frameworks	f r eI m . w 3: k s
+francisco	f r { n . s I s . k @U
+franciskaner	f r { n . s I . s k eI . n @
+franciso	f r { n . s i: . s @U
+francisoco	f r { n . s aI . s @U . k @U
+frank	f r { N k
+frontdesk	f r V n t . d I s k
+fullhouse	f U l . h aU s
+galaxy	g { . l @ k . s I
+gates	g eI t s
+gearbox	g I@ . b Q k s
+george	dZ O: dZ
+gigasamples	g aI . g @ . s @ m . p @ l z
+gigs	g I g z
+hacker	h { . k @
+haggis	h { . g I s
+handy	h { n . d I
+hangover	h { N . @U . v @
+happy	h { . p I
+headset	h e d . s e t
+highlevel	h aI . l I . v @ l
+homepage	h @U m . p eI dZ
+hookers	h U . k @ z
+hope	h @U p
+horse	h O: s
+hot	h Q t
+hotwire	h Q . t w aI . @
+housten	h aU s . t e n
+houston	h aU s . t @ n
+how	h aU
+hudson	h V d . s @ n
+hype	h aI p
+i	aI
+i'd	aI . d
+icaf	aI . s i: . eI . e f
+information	I n . f @ . m eI . S @ n
+institute	I n . s t I . tS u: t
+international	I n . t @ . n { . S @ . n @ l
+interspeech	I n . t @ . s p i: tS
+jack	dZ { k
+jeep	dZ i: p
+jetons	dZ e . t @ n z
+jo	dZ @U
+jolla	dZ @U . l @
+journal	dZ 3: . n @ l
+k	k eI
+kennedys	k e . n I . @ . d I z
+kilobyte	k I . l @U . b aI t
+l	e l
+la	l a
+landlady	l { n d . l eI . d I
+laptop	l { p . t Q p
+laptops	l { p . t Q p s
+last	l A: s t
+leasing	l i: . s I N
+liberty	l I . b @ . t I
+lifebrothers	l aI . f e . b r V . D @ z
+lily	l I . l I
+link	l I N k
+lobster	l Q b . s t @
+los	l @U z
+luckytown	l V . k aI . t aU n
+luckytwon	l V . k I . t w V n
+mc	e m . s i:
+mac	m { k
+mailinglist	m eI . l I N . g l I s t
+mainboard	m eI n . b O: d
+manpower	m { n . p aU . @
+marilyn	m e@ . r I . l I n
+master	m A: . s t @
+matchmaking	m { tS . m eI . k I N
+mate	m eI t
+max	m { k . s I . m @ m
+mcdonald's	m @ k . d Q . n @ l d z
+mealtime	m i: l . t aI m
+megabyte	m e . g @ . b aI t
+metal	m e . t @ l
+microcontroller	m aI . k r @U . k @ n . t r @U . l @
+minimart	m I . n I . m A: t
+minute	m I . n I t
+minutetrading	m I . n j u: . t j U . @ . d I N
+mitch	m I tS
+mock	m Q k
+monica	m Q . n I . k @
+monroe	m @ n . r @U
+movie	m u: . v I
+multipitchtracking	m V l . t I . p I tS . t r { . k I N
+n	e n
+nettokanalizer	n e . t @U . k { . n @ . l aI . z @
+new	n j u:
+newb	n j u: b
+newcomer	n j u: . k V . m @
+news	n j u: z
+node	n @U d
+northwestern	n O: T . w e . s t @ n
+notebook	n @U t . b U k
+nukem	n j u: . k e m
+oakland	@U g z . l @ n d
+offsets	Q f . s e t s
+oldtowm	@U l d . t aU m
+oldtown	@U l d . t aU n
+organisation	O: . g @ . n aI . z eI . S @ n
+outfit	aU t . f I t
+output	aU t . p U t
+p	p i:
+pacino	p @ . s I . n @U
+palm	p A: m
+palmbeach	p A: m . b i: tS
+paper	p eI . p @
+papers	p eI . p @ z
+pearl	p 3: l
+peppers	p e . p @ z
+pin	p I n
+pirate	p aI . @ . r @ t
+player	p l eI . @
+plugin	p l u: . g I n
+point	p OI n t
+pool	p u: l
+pools	p u: l z
+pop-performance	p Q p . p @ . f O: . m @ n s
+posting	p @U . s t I N
+postoffice	p Q . s t Q . f I s
+powell	p aU . @ l
+princess	p r I n . s e s
+pub	p V b
+queen	k w i: n
+r	A:
+raggae	r { . g eI
+ragged	r { . g I d
+raider	r eI . d @
+recognition	r e . k @ g . n I . S @ n
+red	r e d
+retailer	r i: . t eI . l @
+river	r I . v @
+router	r u: . t @
+running	r V . n I N
+saloon	s @ . l u: n
+same	s eI m
+sample	s { m . p @ l
+samplerate	s { m . p l @ . r eI t
+samples	s { m . p @ l z
+samplingrate	s { m . p l I N . g r eI t
+san	s { n
+santa	s { n . t @
+saw	s O:
+science	s aI . @ n s
+scorpions	s k O: . p I . @ n z
+seat	s i: t
+seattle	s i: . { . t @ l
+security	s I . k j O: . r I . t I
+server	s 3: . v @
+sewing	s @U . I N
+shake	S eI k
+shaker	S eI . k @
+shores	S O: z
+show	S @U
+shuttle	S V . t @ l
+sightseeing	s aI t . s i: . I N
+silvester	s I l . v e . s t @
+sinatra	s aI . n @ . t r @
+sir	s 3:
+sketch	s k e tS
+sky	s k aI
+smalltalk	s m O: l . t O: k
+snackbag	s n { k . b { g
+snacks	s n { k s
+snowboard	s n @U . b O: d
+softdrinks	s Q f t . d r I N k s
+softplay	s Q f t . p l @
+software	s Q f t . w e@
+softworks	s Q f t . w 3: k s
+songcontest	s Q N . k @ n . t e s t
+sound	s aU n d
+soundcloud	s aU n d . k l aU d
+spam	s p { m
+spareribs	s p e@ . r e . r I b z
+springs	s p r I N z
+square	s k w e@
+stallone	s t { . l @U n
+steak	s t eI k
+steakhouse	s t eI . k aU s
+steam	s t i: m
+stones	s t @U n z
+story	s t O: . r I
+stream	s t r i: m
+street	s t r i: t
+streetcar	s t r i: t . k A:
+stricktly	s t r I k t . l I
+strip	s t r I p
+student	s t j u: . d @ n t
+subwoofer	s V b . w U . f @
+summersplash	s V . m @ . s I . p l { S
+swimming	s w I . m I N
+swimmingpool	s w I . m I N . p u: l
+t	t i:
+t-	t i:
+tank	t { N k
+teaching	t i: . tS I N
+technology	t e k . n Q . l @ . dZ I
+temecula	t e . m e . k u: . l @
+the	D @
+theory	T i: . @ . r I
+thrill	T r I l
+tomb	t u: m
+touch	t V tS
+tour	t O:
+toys	t OI z
+tradeoff	t r eI . d Q f
+trailer	t r eI . l @
+trion	t r aI . Q n
+tunes	t j u: n z
+u	j u:
+unchained	V n . tS eI n d
+united	j U . n aI . t I d
+us	V s
+v	v i:
+vancouver	v { N . k u: . v @
+volta	v Q l . t @
+walk	w O: k
+walkman	w O: k . m @ n
+week	w i: k
+wind	w aI n d
+woddy	w Q . d I
+woodpecker	w U d . p e . k @
+york	j O: k
+youtube	j u: . tS j u: b
+a	eI
+abstract	@ b . s t r { k t
+access	{ k . s e s
+account	@ . k aU n t
+accounts	@ . k aU n t s
+active	{ k . t I v
+advanced	@ d . v A: n s t
+adventure	@ d . v e n . tS @
+after	A: f . t @
+al	eI . e l
+alien	eI . l I . @ n
+all	O: l
+alone	@ . l @U n
+als	{ l z
+also	O: l . s @U
+analizer	@ . n @ . l aI . z @
+analyzer	@ . n @ . l aI . z @
+andriod	{ n . d r I . Q d
+android	{ n . d r OI d
+anything	e . n I . T I N
+anzipft	{ n . z I p f t
+application	{ . p l I . k eI . S @ n
+arrays	@ . r eI z
+arts	A: t s
+assembler	@ . s e m . b l @
+award	@ . w O: d
+bacon	b eI . k @ n
+balance	b { . l @ n s
+ball	b O: l
+be	b i:
+beats	b i: t s
+because	b I . k Q z
+best	b e s t
+big	b I g
+biscuit	b I . s k I t
+bist	b I s t
+black	b l { k
+bloddbuzz	b l Q d . b V z
+body	b Q . d I
+breakpoint	b r eI . s i: . p i: . I n t
+brown	b r aU n
+burner	b 3: . n @
+busters	b V . s t @ z
+but	b V t
+butler	b V t . l @
+button	b V . t @ n
+buy	b aI
+c	s i:
+call	k O: l
+can	k { n
+cancer	k { n . s @
+card	k A: d
+case	k eI s
+center	s e n . t @
+century	s e n . tS @ . r I
+chair	tS e@
+change	tS eI n dZ
+channel	tS { . n @ l
+chatten	tS { . t @ n
+checks	tS e k s
+chemical	k e . m I . k @ l
+chemicaled	k e . m I . k @ l d
+chillig	tS I . l I g
+chrome	k r @U m
+click	k l I k
+client	k l aI . @ n t
+clients	k l aI . @ n t s
+closing	k l @U . z I N
+cloud	k l aU d
+coats	k @U t s
+code	k @U d
+collectors	k @ . l e k . t @ z
+college	k Q . l I dZ
+colonial	k @ . l @U . n I . @ l
+com	k Q m
+communicator	k @ . m j u: . n I . k eI . t @
+community	k @ . m j u: . n I . t I
+compiler	k @ m . p aI . l @
+conclusions	k @ N . k l u: . Z @ n z
+conference	k Q n . f @ . r @ n s
+content	k Q n . t e n t
+control	k @ n . t r @U l
+converter	k @ n . v 3: . t @
+cookies	k U . k I z
+cool	k u: l
+coolste	k u: l s t
+copy	k Q . p I
+country	k V n . t r I
+crazy	k r eI . z I
+credits	k r e . d I t s
+crew	k r u:
+criminal	k r I . m I . n @ l
+cycle	s aI . k @ l
+cycles	s aI . k @ l z
+day	d eI
+deadline	d e d . l aI n
+defacement	d I . f eI . s m @ n t
+designed	d I . z aI n d
+designen	d I . z aI . n @ n
+difficult	d I . f I . k @ l t
+digital	d I . dZ I . t @ l
+dimensions	d aI . m e n . S @ n z
+direct	d aI . r e k t
+directal	d aI . r e k . t @ l
+docs	d Q k . t @ z
+domain	d @U . m eI n
+don't	d @U n t
+dot	d Q t
+dough	d @U
+down	d aU n
+downloaden	d aU n . l @U . d @ n
+dreamteam	d r i: m . t i: m
+drive	d r aI v
+dropbox	d r Q p . b Q k s
+easy	i: . z I
+eat	i: t
+edge	e dZ
+edition	I . d I . S @ n
+eels	i: l z
+emax	I . m { k s
+end	e n d
+epic	e . p I k
+event	I . v e n t
+exchange	I k s . tS eI n dZ
+factory	f { k . t @ . r I
+fail	f eI l
+fair	f e@
+fancy	f { n . s I
+fast	f A: s t
+fiber	f aI . b @
+fingerprinting	f I N . g @ . p r I n . t I N
+firefox	f aI . @ . f Q k s
+five	f aI v
+food	f u: d
+for	f O:
+forcefully	f O: s . f @ . l I
+frameworks	f r eI m . w 3: k s
+freaky	f r i: . k I
+free	f r i:
+friendly	f r e n d . l I
+front	f r V n t
+frontend	f r V n . t e n d
+fun	f V n
+für	f 3:
+g-mail	dZ i: . m eI l
+gain	g eI n
+ge	dZ i: . i:
+gear	g I@
+gecheckt	dZ e . tS e k t
+gehabt	g i: . { t
+gepostet	dZ I . p Q . s t @ t
+gesampelt	g e . s { m . p e l t
+geschedult	dZ e S . d V l t
+gesmilet	g e z . m aI . l eI
+gestartet	dZ e . s t A: . t e t
+go	g @U
+good	g U d
+google	g u: . g @ l
+ground	g r aU n d
+hackt	h { k t
+handsome	h { n . s @ m
+hardware	h A: d . w e@
+hat	h { t
+heal	h i: l
+heavy	h e . v I
+hero	h I@ . r @U
+high	h aI
+highlevel	h aI . l I . v @ l
+his	h I z
+homepage	h @U m . p eI dZ
+hosten	h @U . s t e n
+hoster	h Q . s t @
+hosting	h @U . s t I N
+hot	h Q t
+how	h aU
+hundred	h V n . d r @ d
+i	aI
+itunes	I . tS u: n z
+if	I f
+in	I n
+inclusive	I N . k l u: . s I v
+indoor	I n . d O:
+ingame	I N . g eI m
+ins	I n z
+instant	I n . s t @ n t
+interrupt	I n . t @ . r V p t
+ist	I s t
+it	I t
+it's	I t s
+items	aI . t @ m z
+k	k eI
+key	k i:
+kicken	k I . k @ n
+king	k I N
+know	n @U
+lady	l eI . d I
+language	l { N . g w I dZ
+last	l A: s t
+layer	l eI . @
+leave	l i: v
+level	l e . v @ l
+library	l aI . b r @ . r I
+lidge	l I dZ
+life	l aI f
+light	l aI t
+like	l aI k
+linedancen	l aI n . d A: n . s e n
+link	l I N k
+links	l I N k s
+live	l I v
+loggt	l Q f t
+makes	m eI k s
+making	m eI . k I N
+management	m { . n I dZ . m @ n t
+marines	m @ . r i: n z
+markets	m A: . k I t s
+master	m A: . s t @
+maybe	m eI . b I
+me	m i:
+meal	m i: l
+medium	m i: . d I . @ m
+medley	m e d . l I
+member	m e m . b @
+merchandise	m 3: . tS @ n . d aI s
+met	m e t
+microbrakes	m aI . k r @U . b r eI k s
+microsoft	m aI . k r @ . s Q f t
+minute	m I . n I t
+mixing	m I k . s I N
+mobile	m @U . b aI l
+mode	m @U d
+mom	m Q m
+money	m V . n I
+more	m O:
+mother	m V . D @
+movie	m u: . v I
+much	m V tS
+my	m aI
+name	n eI m
+need	n i: d
+net	n e t
+network	n e t . w 3: k
+networking	n e t . w 3: . k I N
+new	n j u:
+newcomer	n j u: . k V . m @
+newquest	n j u: . k w @ s t
+next	n e k s t
+nice	n aI s
+nightlines	n aI t . l i: n z
+no	n o
+node	n @U d
+normal	n O: . m @ l
+notes	n @U t s
+notification	n @U . t I . f I . k eI . S @ n
+oder	Q . d @
+of	Q v
+off	Q f
+office	Q . f I s
+ohio	@U . h I . @U
+on	o~
+one	w V n
+online	Q n . l aI n
+open	@U . p @ n
+outlook	aU t . l U k
+p	p i:
+package	p { . k I dZ
+packages	p { . k I . dZ I z
+painless	p eI n . l @ s
+paint	p eI n t
+painting	p eI n . t I N
+pants	p { n t s
+paper	p eI . p @
+papers	p eI . p @ z
+paseo	p eI . s @U
+paste	p eI s t
+people	p i: . p @ l
+performance	p @ . f O: . m @ n s
+phone	f @U n
+player	p l eI . @
+pleasure	p l e . Z @
+plots	p l Q t s
+plug	p l V g
+pool	p u: l
+porridge	p Q . r I dZ
+positioning	p @ . z I . S @ . n I N
+postdoc	p @U s t . d @U k
+postdocs	p @U s t . d Q k s
+powerfuller	p aU . @ . f @ . l @
+preorder	p r i: . O: . d @
+proceedings	p r @U . s i: . d I N z
+production	p r @ . d V k . S @ n
+program	p r @U . g r { m
+proposal	p r @ . p @U . z @ l
+proposals	p r @ . p @U . z @ l z
+pushen	p U . S e n
+question	k w e s . tS @ n
+rage	r eI dZ
+raid	r eI d
+rainbow	r eI n . b @U
+reader	r i: . d @
+rebooten	r i: . b u: . t @ n
+record	r I . k O: d
+reflow	r i: . f l @U
+released	r I . l i: s t
+rescue	r e . s k j u:
+reviewen	r I . v j u: . @ n
+ripped	r I p t
+ritual	r I . t j U . @ l
+rock	r Q k
+roote	r u: t
+rooten	r u: . t @ n
+run	r V n
+salami	s @ . l A: . m I
+sampelst	s { m . p e l s t
+sample	s { m . p @ l
+scale	s k eI l
+science	s aI . @ n s
+scope	s k @U p
+security	s I . k j O: . r I . t I
+series	s I@ . r i: z
+server	s 3: . v @
+service	s 3: . v I s
+setting	s e . t I N
+share	S e@
+shop	S Q p
+short	S O: t
+show	S @U
+shuttle	S V . t @ l
+single	s I N . g @ l
+sixty	s I k . s t I
+skype	s k aI p
+slash	s l { S
+smooth	s m u: D
+snowboard	s n @U . b O: d
+so	s @U
+social	s @U . S @ l
+sofort	s @U . f O: t
+softplay	s Q f t . p l @
+software	s Q f t . w e@
+sometimes	s V m . t aI m z
+sounds	s aU n d z
+sour	s aU . @
+spacig	s p eI . s I g
+spank	s p { N k
+speakers	s p i: . k @ z
+speech	s p i: tS
+spin	s p I n
+spooky	s p u: . k I
+stalken	s t O: . k @ n
+steam	s t i: m
+step	s t e p
+strange	s t r eI n dZ
+studies	s t V . d I z
+study	s t V . d I
+sucker	s V . k @
+sugar	S U . g @
+surfer	s 3: . f @
+sweat	s w e t
+swing	s w I N
+systems	s I . s t @ m z
+tablet	t { . b l @ t
+tank	t { N k
+target	t A: . g I t
+task	t A: s k
+task-	t A: s k
+tasks	t A: s k s
+the	D @
+three	T r i:
+thunderbird	T V n . d @ b d
+time	t aI m
+too	t u:
+tool	t u: l
+tools	t u: l z
+total	t @U . t @ l
+tower	t aU . @
+tracken	t r { . k @ n
+tradeoff	t r eI . d Q f
+transactions	t r A: n . z { k . S @ n z
+transcript	t r A: n . s k r I p t
+tricky	t r I . k I
+trigger	t r I . g @
+trouble	t r V . b @ l
+two	t u:
+u	j u:
+ultimate	V l . t I . m @ t
+und	V n d
+up	V p
+usability	j u: . z @ . b I . l I . t I
+use	j u: z
+user	j u: . z @
+userlanguage	j u: . s 3: . l { N . g w I dZ
+vacant	v eI . k @ n t
+very	v e . r I
+warcraft	w O: . k r A: f t
+warm	w O: m
+watch	w Q tS
+web	w e b
+webspace	w e b . s p eI s
+western	w e . s t @ n
+what	w Q t
+which	w I tS
+wide	w aI d
+windows	w I n . d @U z
+word	w 3: d
+wordpress	w 3: d . p r e s
+world	w 3: l d
+worst	w 3: s t
+wortscase	w 3: t . s k eI s
+would	w @ d
+wurscht	w 3: . s I T t
+yeah	j e@
+yes	j e s
+you	j u:
+your	j O:
+überhaupt	u: . b r O: p t
+familia	f a . m i . l j a
+gracia	g r a . T j a
+las	l a s
+ramblas	rr a m . b l a s
+sagrada	s a . G r a . D a
+sevilla	s e . B i . L a
+queso	k e . s o
+arc	a R k
+bleu	b l 2
+buffets	b y . f E
+camargue	k a . m a R g
+carrefour	k a R . f u R
+cordon	k O R . d o~
+javier	Z a . v i . e
+jean	Z a~
+louvre	l u v R
+luis	l H i
+paris	p a . R i
+roulette	R u . l E t
+roulettetisch	R u . l E t . t i S
+triomphe	t R i . o~ f
+vinaigrette	v i . n E . g R E t
+vuitton	v H i . t o~
+bien	b j e~
+de	d e
+la	l a
+le	l @
+malheur	m a . l 9 R
+parle	p a R l
+relais	R @ . l E
+sur	s y R
+à	a
+sobe	S o . b E
+alice	a . l i . tS e
+cardinale	k a r . d i . n a . l e
+gallo	g a ll . o
+gucci	g u ttS . i
+monte	m o n . t e
+via	v i . a
+appetito	a pp . e . t i . t o
+buon	b w O n
+ce	tS e
+grande	g r a n . d e
+laura	l a . u . r a
+luna	l u . n a
+non	n O n
+problema	p r o . b l E . m a
+português	p o r . t u . G u s
+lisboa	l i z . B o . a

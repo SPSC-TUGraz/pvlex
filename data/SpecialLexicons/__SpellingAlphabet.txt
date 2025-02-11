@@ -1,0 +1,30 @@
+A	a:
+B	b e:
+C	ts e:
+D	d e:
+E	e:
+F	E f
+G	g e:
+H	h a:
+I	i:
+J	j O t
+K	k a:
+L	E l
+M	E m
+N	E n
+O	o:
+P	p e:
+Q	k u:
+R	E6
+S	E s
+T	t e:
+U	u:
+V	f aU
+W	v e:
+X	I k s
+Y	Y p s i l O n
+Z	ts E t
+ß	E s ts E t
+Ä	E:
+Ö	2:
+Ü	y:

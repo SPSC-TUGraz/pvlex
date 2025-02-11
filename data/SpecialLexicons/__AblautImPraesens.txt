@@ -1,0 +1,79 @@
+abläufst	? 'a p . l aU f s t
+abläuft	? 'a p . l aU f t
+absäufst	? 'a p . s aU f s t
+absäuft	? 'a p . s aU f t
+aufhält	? 'aU f . h a l . t @ t
+aufhälst	? 'aU f . h a l . t @ s t
+bäckt	'b a k t
+bläst	'b l a s t
+brätst	'b r a . t @ s t
+brät	'b r a . t @ t
+drüberfährst	d r y: . b E6 . 'f a: s t
+drüberfährst	d r y: . v E6 . 'f a: s t
+drüberfährst	d r y: . v E6 . 'f a: t
+drüberfährst	d r y: . b E6 . 'f a: t
+durchfährst	d U6 x . 'f a: s t
+durchfährt	d U6 x . 'f a: t
+einlädst	aI n . 'l a . d @ s t
+einlädt	aI n . 'l a . d @ t
+einträgst	aI n . 't r a k s t
+einträgt	aI n . 't r a k t
+empfängst	? E m . 'f a N s t
+empfängst	? E m . 'p f a N s t
+empfängt	? E m . 'p f a N t
+empfängt	? E m . 'f a N t
+erfährst	? E6 . 'f a: s t
+erfährt	? E6 . 'f a: t
+fährst	'f a: s t
+fährt	'f a: t
+fällst	'f a l s t
+fällt	'f a l t
+fängst	'f a N s t
+fängt	'f a N t
+gefällst	g @ . 'f a l s t
+gefällt	g @ . 'f a l t
+gräbst	'g r a b s t
+gräbt	'g r a b t
+hältst	'h a l . t @ s t
+hält	'h a l . t @ t
+herumläufst	h E . 'r U m . l aU f s t
+herumläuft	h E . 'r U m . l aU f t
+hochlädst	h o: x . 'l a . d @ s t
+hochlädt	h o: x . 'l a . d @ t
+lädst	'l a . d @ s t
+lädt	'l a . d @ t
+lässt	'l a s t
+läufst	'l aU f s t
+läuft	'l aU f t
+mitfährst	m I t . 'f a: s t
+mitfährt	m I t . 'f a: t
+rätst	'r a . t @ s t
+rät	'r a . t @ t
+runterfährst	'r U n . t E6 . 'f a: s t
+runterfährt	'r U n . t E6 . 'f a: t
+säufst	's aU f s t
+säuft	's aU f t
+schläfst	'S l a f s t
+schläft	'S l a f t
+schlägst	'S l a k s t
+schlägt	'S l a k t
+stößt	'S t o s t
+trägst	't r a k s t
+trägt	't r a k t
+unterhältst	? U n . t E6 . 'h a l . t @ s t
+unterhält	? U n . t E6 . 'h a l . t @ t
+verhälst	f E6 . 'h a l . t @ s t
+verhält	f E6 . 'h a l . t @ t
+verläufst	f E6 . 'l aU f s t
+verläuft	f E6 . 'l aU f t
+verschläfst	f E6 . 'S l a f s t
+verschläft	f E6 . 'S l a f t
+verträgst	f E6 . 't r a k s t
+verträgt	f E6 . 't r a k t
+wächst	'v a k s t
+wäschst	'v a S s t
+wäscht	'v a S t
+zusammenhälst	ts u . 's a m . m e n . h a l . t @ s t
+zusammenhält	ts u . 's a m . m e n . h a l . t @ t
+zuschlägst	'ts u . S l a k s t
+zuschlägt	'ts u . S l a k t
