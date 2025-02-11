@@ -1,3 +1,11 @@
+"""
+This class implementation is where the actual generation of pronunciation variants (PVs) happens.
+It is opposite of dry programming on purpose! Rules cannot be applied all at once as some pronunciation changes depend
+on each other (for phonetic/phonological reasons). Therefore, do not change the order in which the functions are
+applied. If you want to add more rules, be careful where to put them. (Ask the phonetician of your trust.)
+Rules (with examples) are defined in 'config.json'.
+"""
+
 import os
 import re
 from typing import Optional
@@ -11,7 +19,7 @@ from pvutils.Pronunciation import Pronunciation
 # INFO: REGEXSEARCH IF VARIANTS: [\w]*\t(([\w@:]+\s?)*)\t
 def move_syllable_stress(lexRaw: dict) -> dict:
     """
-
+    Moves the syllable stress from the vowel to the beginning of the syllable.
     Parameters
     ----------
     lexRaw: dict
@@ -45,7 +53,7 @@ def move_syllable_stress(lexRaw: dict) -> dict:
 
 def remove_duplicate_pronunciations(listWduplicates: list) -> list:
     """
-        This method removes duplicates in a list of Pronunciations, i.e.
+        Removes duplicates in a list of pronunciations, i.e.
         e.g.  ["? ' a:", "? ' a:", "? ' O:", "? ' O:"]
           --> ["? ' a:", "? ' O:"]
         while keeping the rules that created these variants (concatenate them)
@@ -154,10 +162,10 @@ def remove_illegal_neighbourhood(word, listWillegal: list, recentRule: Optional[
 
 
 class PronVarGenerator():
-
+    """Class for handling multiple pronunciation variants (PVs) for the same word."""
     def __init__(self, lexName, rules):
         self.verboseInfo = True;
-        # rules are defined in the configuration file 'configPrep.yaml'
+        # rules are defined in the configuration file 'config.json'
         self.rules = rules;
         self.ruleCounter = {};
         # initialise count with zero for each rule
@@ -533,7 +541,6 @@ class PronVarGenerator():
 
     def full_vowel_substitution_V(self, word: str, pronsWcodes: list) -> list:
         """
-        2do: update documentation
         Substitute specific set of vowels.
         CAUTION: Do not change order!
 
@@ -569,7 +576,7 @@ class PronVarGenerator():
             for wordPron in pronsWcodes:
                 # rule O --> U and rule a --> O (A doesn't occur; nonetheless, let's consider it)
                 tmpPron = re.sub(r"([aA])(:?) ([^n])(.*)", r"O\2 \3\4",
-                                 wordPron.pron);  # 2do: i might want to change r to 6 here already; discuss that
+                                 wordPron.pron);  # for discussion: we might want to change r to 6 here already
                 tmpPron = tmpPron.strip();
                 # create new instance of 'Pronunciation' in any case, append and count only if something had changed
                 newPron = Pronunciation(tmpPron, wordPron.rules);
@@ -1788,7 +1795,7 @@ class PronVarGenerator():
 
     def wordfinal_plosive_deletion_V(self, word: str, pronsWcodes: list) -> list:
         """
-        ... CONTEXT RULE!!! does only make sense with a subsequent word.
+        ... COARTICULATION RULE!!! Only makes sense with a subsequent word, so don't be surprised by some strange PVs.
         """
         if not self.rules['wordfinal_plosive_deletion_V']:
             return pronsWcodes;
@@ -1823,8 +1830,7 @@ class PronVarGenerator():
         return OrderedDict(sorted(self.lexiconPVs.items()));
 
     def remove_duplicates_from_lexicon(self, lexWduplicates: dict):
-        """ check.
-        2do: maybe deprecated now
+        """ check. (maybe obsolete now, but just to be safe.)
         This method removes duplicates in dictionary values, i.e. in PVs
         e.g.  A : ["? ' a:", "? ' a:", "? ' O:", "? ' O:"]
           --> A : ["? ' a:", "? ' O:"]
@@ -1855,9 +1861,6 @@ class PronVarGenerator():
         -------
         lexiconClean : clean version of lexicon
         """
-        # 2do: change crappy replacement to something with less repetition
-        # if not bool(lexiconBefore):
-        #     self.create_lexicon(); # 2do: rename to sth that contains "raw"?
 
         # remove duplicates in PVs before cleanup
         lexiconWOduplicates = self.remove_duplicates_from_lexicon(lexiconBefore)
