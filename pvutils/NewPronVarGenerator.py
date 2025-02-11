@@ -79,11 +79,6 @@ def remove_duplicate_pronunciations(listWduplicates: list) -> list:
 
 def remove_illegal_neighbourhood(word, listWillegal: list, recentRule: Optional[str]) -> list:
     """
-    2do: not finished!
-    2do: IMPORTANT: don't merge  a: a: -- at least if it occurs after rdelection_syllablefinal (e.g. Seminararbeiten)
-    2do: at the very end, again check for n n or l l über silben hinweg
-    2do: Do I want to merge all O 6 to O6?
-    2do: if l vocalisation in words with 2nd l, 2nd l needs to be removed; dependend on irregularities of G2P ...
     This function merges neighboured phones that should not be neighboured:
         bräunen     b r OY n  n  --> b r OY n
         eingepackt  aI n g p a k t --> aI n p a k t
@@ -131,7 +126,7 @@ def remove_illegal_neighbourhood(word, listWillegal: list, recentRule: Optional[
         if recentRule == 'final_cleanup':
             # remove syllable boundaries and glottat stops
             symbols = [r"\.", "\'", r"\?"];
-            if "tmpPronVar" not in locals():  # 2do: I think this will never be true --> remove it
+            if "tmpPronVar" not in locals():  # beautify: I think this will never be true --> remove it
                 tmpPronVar = re.sub(r"\. ", r"", pronVar.pron);
             for symbol in symbols:
                 tmpPronVar = re.sub(rf"{symbol}", r"", tmpPronVar);
@@ -139,7 +134,7 @@ def remove_illegal_neighbourhood(word, listWillegal: list, recentRule: Optional[
             # remove multiple white spaces
             tmpPronVar = re.sub(r"\s+", r" ", tmpPronVar);
 
-            # split phonemes like 'ts' into their phones 2do: move this hard-coding into the configuration file
+            # split phonemes like 'ts' into their phones beautify: this hard-coding could be moved into config file
             splitPhonemes = {'ts': "t s", 'tS': "t S", 'dZ': "d Z"};
             for phonemeBefore, phonesAfter in splitPhonemes.items():
                 tmpPronVar = re.sub(rf"({phonemeBefore})+", rf"{phonesAfter} ", tmpPronVar);
@@ -287,7 +282,6 @@ class PronVarGenerator():
 
     def finalC_as_k_R(self, word: str, pronsWcodes: list) -> list:
         """
-        2do: update documentation
         This function replaces GG pronunciation of final 'g' into AG version, e.g.
         fertig: f'E6+tIC  -->  f'E6+tIk
         in GG, this is pronunciated like "ch" in "ich"; in AG, this becomes "k"
@@ -391,8 +385,7 @@ class PronVarGenerator():
 
     def medialC_as_k_V(self, word: str, pronsWcodes: list) -> list:
         """
-        2do: update documentation
-        2do: for words like "eigentlich", we match 'ig' within the word and change 'ich' at its end ...
+        beautify: for words like "eigentlich", we match 'ig' within the word and change 'ich' at its end ...
         This function replaces GG pronunciation of SYLLABLE final 'g' into AG version, e.g.
         dreißigsten: 	d r aI s I C s t @ n  -->  d r aI s I k s t @ n
         in GG, this is pronunciated like "ch" in "ich"; in AG, this becomes "k"
@@ -439,7 +432,6 @@ class PronVarGenerator():
 
     def voiced2unvoiced_s_R(self, word: str, pronsWcodes: list) -> list:
         """
-        2do: update documentation
         This method replaces every voiced s with an unvoiced s
         Vorsicht    fo:6zICt  -->  fo:6sICt
         Ingenieur   InZ@nj2:6  -->  InS@nj2:6
@@ -570,7 +562,7 @@ class PronVarGenerator():
             return pronsWcodes;
 
         if not isinstance(pronsWcodes, list):
-            print('2do: exception handling here')
+            print('exception handling here')
         else:
             pronsWcodesNew = copy.deepcopy(pronsWcodes);
             for wordPron in pronsWcodes:
@@ -646,7 +638,6 @@ class PronVarGenerator():
 
     def vowel_diphthong_exchange_V(self, word: str, pronsWcodes: list) -> list:
         """
-        2do: update documentation
         Exchange specific set of vowels/diphthongs.
         CAUTION: Do not change order!!!
 
@@ -678,7 +669,7 @@ class PronVarGenerator():
             return pronsWcodes;
 
         if not isinstance(pronsWcodes, list):
-            print('2do: exception handling here')
+            print('exception handling here')
         else:
             pronsWcodesNew = copy.deepcopy(pronsWcodes);
             for wordPron in pronsWcodes:
@@ -763,7 +754,7 @@ class PronVarGenerator():
             return pronsWcodes;
 
         if not isinstance(pronsWcodes, list):
-            print('2do: exception handling here')
+            print('exception handling here')
         else:
             pronsWcodesNew = copy.deepcopy(pronsWcodes);
             for wordPron in pronsWcodes:
@@ -783,7 +774,6 @@ class PronVarGenerator():
 
     def schwa_deletion_in_ge_V(self, word: str, pronsWcodes: list) -> list:
         """
-        # 2do: complete docu
         gemacht: g @ m a x t  -->  g m a x t
 
         consonant [g] will be devoiced to [k] (in remove_illegal_neighbourhood())
@@ -793,7 +783,7 @@ class PronVarGenerator():
             return pronsWcodes;
 
         if not isinstance(pronsWcodes, list):
-            print('2do: exception handling here')
+            print('exception handling here')
         else:
             pronsWcodesNew = copy.deepcopy(pronsWcodes);
             for wordPron in pronsWcodes:
@@ -817,7 +807,7 @@ class PronVarGenerator():
         Open syllable: Vowel followed by nothing (e.g. 'fly')
 
         Aufnahmegerät :  aU f . n a: . m @ . g @ . r E: t	-->	aU f . n a: . m . g r E: t
-        2do: I'd like to exclude 'g' as predecessor, check whether that's intended
+        beautify: I'd like to exclude 'g' as predecessor, check whether that's intended
 
         Parameters
         ----------
@@ -835,7 +825,7 @@ class PronVarGenerator():
             return pronsWcodes;
 
         if not isinstance(pronsWcodes, list):
-            print('2do: exception handling here')
+            print('exception handling here')
         else:
             pronsWcodesNew = copy.deepcopy(pronsWcodes);
             for wordPron in pronsWcodes:
@@ -886,7 +876,7 @@ class PronVarGenerator():
             return pronsWcodes;
 
         if not isinstance(pronsWcodes, list):
-            print('2do: exception handling here')
+            print('exception handling here')
         else:
             pronsWcodesNew = copy.deepcopy(pronsWcodes);
             for wordPron in pronsWcodes:
@@ -915,7 +905,6 @@ class PronVarGenerator():
 
     def ge_deletion_plosives_V(self, word: str, pronsWcodes: list) -> list:
         """
-        2do: update documentation
         This function removes'g @' at the beginning of a word if
         followed by plosives in the next syllable in the next syllable
         gepolstert:	 g @ p O l s t 6 t -> p O l s t 6 t
@@ -937,7 +926,7 @@ class PronVarGenerator():
             return pronsWcodes;
 
         if not isinstance(pronsWcodes, list):
-            print('2do: exception handling here')
+            print('exception handling here')
         else:
             pronsWcodesNew = copy.deepcopy(pronsWcodes);
             for wordPron in pronsWcodes:
@@ -958,7 +947,6 @@ class PronVarGenerator():
 
     def ge_deletion_sibilantAffricates_V(self, word: str, pronsWcodes: list) -> list:
         """
-        2do: update documentation
         This function removes 'g @' at the beginning of a word if
         followed by sibilants in the next syllable
         gecheckt :      g @ tS E k t    -->  tS E k t
@@ -979,7 +967,7 @@ class PronVarGenerator():
             return pronsWcodes;
 
         if not isinstance(pronsWcodes, list):
-            print('2do: exception handling here')
+            print('exception handling here')
         else:
             pronsWcodesNew = copy.deepcopy(pronsWcodes);
             for wordPron in pronsWcodes:
@@ -1000,7 +988,7 @@ class PronVarGenerator():
 
     def gn2N_V(self, word: str, pronsWcodes: list):
         """
-        2do: this is one of multiple nasal assimilations. could be merged.
+        beautify: this is one of multiple nasal assimilations. could be merged.
         This function adds variant if orthography contains "gn"
 
         elektromagnetische: e l E k t r o m a g n e: t I S @	 -> e l E k t r o m a N n e: t I S @
@@ -1020,7 +1008,7 @@ class PronVarGenerator():
             return pronsWcodes;
 
         if not isinstance(pronsWcodes, list):
-            print('2do: exception handling here')
+            print('exception handling here')
         else:
             pronsWcodesNew = copy.deepcopy(pronsWcodes);
             if re.findall('gn', word):
@@ -1042,7 +1030,7 @@ class PronVarGenerator():
 
     def gschwan2N_V(self, word: str, pronsWcodes: list):
         """
-        2do: this is one of multiple nasal assimilations. could be merged.
+        beautify: this is one of multiple nasal assimilations. could be merged.
         This function replaces g @ n with N if within one syllable.
 
         tragen :  t r a: g @ n  -->  't r a: N
@@ -1062,7 +1050,7 @@ class PronVarGenerator():
             return pronsWcodes;
 
         if not isinstance(pronsWcodes, list):
-            print('2do: exception handling here')
+            print('exception handling here')
         else:
             pronsWcodesNew = copy.deepcopy(pronsWcodes);
             for wordPron in pronsWcodes:
@@ -1080,7 +1068,7 @@ class PronVarGenerator():
 
     def Nschwan2N_V(self, word: str, pronsWcodes: list):
         """
-        2do: this is one of multiple nasal assimilations. could be merged.
+        beautify: this is one of multiple nasal assimilations. could be merged.
         This function replaces N @ n with N.
 
         aufgegangen :  'aU f g @ g a N @ n  -->  'aU f g @ g a N
@@ -1100,7 +1088,7 @@ class PronVarGenerator():
             return pronsWcodes;
 
         if not isinstance(pronsWcodes, list):
-            print('2do: exception handling here')
+            print('exception handling here')
         else:
             pronsWcodesNew = copy.deepcopy(pronsWcodes);
             for wordPron in pronsWcodes:
@@ -1118,7 +1106,7 @@ class PronVarGenerator():
 
     def nm2m_V(self, word: str, pronsWcodes: list):
         """
-        2do: this is one of multiple nasal assimilations. could be merged.
+        beautify: this is one of multiple nasal assimilations. could be merged.
         This function replaces n m with m. Occurs after schwa deletion before n.
 
         deinem:     d aI n m  -->  d aI m
@@ -1139,7 +1127,7 @@ class PronVarGenerator():
             return pronsWcodes;
 
         if not isinstance(pronsWcodes, list):
-            print('2do: exception handling here')
+            print('exception handling here')
         else:
             pronsWcodesNew = copy.deepcopy(pronsWcodes);
             for wordPron in pronsWcodes:
@@ -1180,7 +1168,7 @@ class PronVarGenerator():
             return pronsWcodes;
 
         if not isinstance(pronsWcodes, list):
-            print('2do: exception handling here')
+            print('exception handling here')
         else:
             pronsWcodesNew = copy.deepcopy(pronsWcodes);
 
@@ -1231,7 +1219,7 @@ class PronVarGenerator():
             return pronsWcodes;
 
         if not isinstance(pronsWcodes, list):
-            print('2do: exception handling here')
+            print('exception handling here')
         else:
 
             pronsWcodesNew = copy.deepcopy(pronsWcodes);
@@ -1277,7 +1265,7 @@ class PronVarGenerator():
             return pronsWcodes;
 
         if not isinstance(pronsWcodes, list):
-            print('2do: exception handling here')
+            print('exception handling here')
         else:
             pronsWcodesNew = copy.deepcopy(pronsWcodes);
             for wordPron in pronsWcodes:
@@ -1298,7 +1286,6 @@ class PronVarGenerator():
 
     def t_delition_in_consonantClusters_V(self, word: str, pronsWcodes: list):
         """
-        2do: update docu
         This function deletes 't' in between consonants except plosives.
 
         dutzendfach: d U t s @ n t f a x  -->  d U t s @ n f a x
@@ -1324,7 +1311,7 @@ class PronVarGenerator():
             return pronsWcodes;
 
         if not isinstance(pronsWcodes, list):
-            print('2do: exception handling here')
+            print('exception handling here')
         else:
             pronsWcodesNew = copy.deepcopy(pronsWcodes);
             for wordPron in pronsWcodes:
@@ -1342,7 +1329,6 @@ class PronVarGenerator():
 
     def t_deletion_before_plosives_V(self, word: str, pronsWcodes: list):
         """
-        2do: update docu
         This function deletes t behind vowels if t is followed by plosives.
 
         Kreditkarte:    k r e d i: t k a r t @  -->  k r e d i: k a r t @
@@ -1363,7 +1349,7 @@ class PronVarGenerator():
             return pronsWcodes;
 
         if not isinstance(pronsWcodes, list):
-            print('2do: exception handling here')
+            print('exception handling here')
         else:
             pronsWcodesNew = copy.deepcopy(pronsWcodes);
             for wordPron in pronsWcodes:
@@ -1381,7 +1367,6 @@ class PronVarGenerator():
 
     def carryover_assimilation_plosives_V(self, word: str, pronsWcodes: list) -> list:
         """
-        2do: update docu
         This function replaces the lenix plosives b, d and g or the stressed
         if preceeded by a syllable boundary and one of these consonant groups ([tk]), ([pk]) or ([tpk])
 
@@ -1400,7 +1385,7 @@ class PronVarGenerator():
             return pronsWcodes;
 
         if not isinstance(pronsWcodes, list):
-            print('2do: exception handling here')
+            print('exception handling here')
         else:
             pronsWcodesNew = copy.deepcopy(pronsWcodes);
             for wordPron in pronsWcodes:
@@ -1424,8 +1409,7 @@ class PronVarGenerator():
 
     def lenition_plosive_V(self, word: str, pronsWcodes: list) -> list:
         """
-        2do: beautify
-        2do: update docu
+        beautify
         This function substitutes the plosives t, p and b to d, b and v.
 
         Arbeit  a: b aI t  -->  a: v aI t
@@ -1445,7 +1429,7 @@ class PronVarGenerator():
             return pronsWcodes;
 
         if not isinstance(pronsWcodes, list):
-            print('2do: exception handling here')
+            print('exception handling here')
         else:
             pronsWcodesNew = copy.deepcopy(pronsWcodes);
 
@@ -1473,11 +1457,10 @@ class PronVarGenerator():
     def Cx_deletion_coda_V(self, word: str, pronsWcodes: list):
         """
 		manner-assimilierung an 'k'
-        2do: update docu
         This function deletes the fricatives x and C if they occur in the coda of a syllable (i.e. after the vowel)
         if it is preceeded by vowels [AEIOYU9aeiouy2@:~]
-		
-		2do: nur wenn danach g oder k kommt
+
+		beautify: nur wenn danach g oder k kommt
 
         Wahrscheinlichkeit :  v a: 6 'S aI n l I C k aI t  -->  v a: 6 'S aI n l I k aI t
         Wichtigkeit :  
@@ -1498,7 +1481,7 @@ class PronVarGenerator():
             return pronsWcodes;
 
         if not isinstance(pronsWcodes, list):
-            print('2do: exception handling here')
+            print('exception handling here')
         else:
             pronsWcodesNew = copy.deepcopy(pronsWcodes);
             for wordPron in pronsWcodes:
@@ -1516,7 +1499,6 @@ class PronVarGenerator():
 
     def final_n2m_V(self, word: str, pronsWcodes: list):
         """
-        2do: update docu
         haben: h a: b n
                -> h a: b m
         Attention: This rule normally only applies if a schwa deletion occured
@@ -1536,7 +1518,7 @@ class PronVarGenerator():
             return pronsWcodes;
 
         if not isinstance(pronsWcodes, list):
-            print('2do: exception handling here')
+            print('exception handling here')
         else:
             pronsWcodesNew = copy.deepcopy(pronsWcodes);
             for wordPron in pronsWcodes:
@@ -1554,7 +1536,6 @@ class PronVarGenerator():
 
     def bilabial_plosive_deletion_afterbefore_m_V(self, word: str, pronsWcodes: list):
         """
-        2do: update doc
         This function deletes bilabial plosives (p,b) after/before m.
 
         durchkämpft : d U6 C k E m p f t  -->  d U6 C k E m f t
@@ -1576,7 +1557,7 @@ class PronVarGenerator():
             return pronsWcodes;
 
         if not isinstance(pronsWcodes, list):
-            print('2do: exception handling here')
+            print('exception handling here')
         else:
             pronsWcodesNew = copy.deepcopy(pronsWcodes);
             for wordPron in pronsWcodes:
@@ -1598,7 +1579,6 @@ class PronVarGenerator():
 
     def alveolar_plosive_deletion_afterbefore_n_V(self, word: str, pronsWcodes: list):
         """
-        2do: update documentation
         This function deletes alveolar plosives (d,t) after/before n.
 
         angeordnet :  a n g @ O6 d n @ t --> a n g @ O6 n @ t
@@ -1620,7 +1600,7 @@ class PronVarGenerator():
             return pronsWcodes;
 
         if not isinstance(pronsWcodes, list):
-            print('2do: exception handling here')
+            print('exception handling here')
         else:
             pronsWcodesNew = copy.deepcopy(pronsWcodes);
             for wordPron in pronsWcodes:
@@ -1640,9 +1620,9 @@ class PronVarGenerator():
 
     def l_vocalisation_V(self, word: str, pronsWcodes: list):
         """
-        2do: most is done now but I still need to remove the cases where stressed vowel is not matched and thus illegal
-             l vocalisation occurs
-        2do: update docu
+        beautify: illegal l vocalisation occurs where stressed vowel is not matched; since it's only adding a variant,
+        that's not a problem but still unnecessary
+
         This method vocalizes "l's" which can be followed by specific consonants
         at a syllable boundary or the end of a word (coda) and which are
         preceeded by specific vocals ("it changes "vocal + l").
@@ -1694,7 +1674,7 @@ class PronVarGenerator():
             return pronsWcodes;
 
         if not isinstance(pronsWcodes, list):
-            print('2do: exception handling here')
+            print('exception handling here')
         else:
             pronsWcodesNew = copy.deepcopy(pronsWcodes);
             for wordPron in pronsWcodes:
@@ -1771,7 +1751,7 @@ class PronVarGenerator():
             return pronsWcodes;
 
         if not isinstance(pronsWcodes, list):
-            print('2do: exception handling here')
+            print('exception handling here')
         else:
             # Pronunciation(word_pron, ['canon'])
             pronsWcodesNew = copy.deepcopy(pronsWcodes);
@@ -1801,7 +1781,7 @@ class PronVarGenerator():
             return pronsWcodes;
 
         if not isinstance(pronsWcodes, list):
-            print('2do: exception handling here')
+            print('exception handling here')
         else:
             pronsWcodesNew = copy.deepcopy(pronsWcodes);
             for wordPron in pronsWcodes:
@@ -1841,7 +1821,6 @@ class PronVarGenerator():
 
     def cleanup_lexicon(self, lexiconBefore: dict, opts=[]):
         """
-        2do: update docu
         Clean up the lexicon lexicon from syllable boundaries, stress symbols
         or glottal stop symbols. 
 

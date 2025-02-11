@@ -567,7 +567,7 @@ def write_homophone_lexicon(lexicon: dict, fName: str, fPath="", fEncoding='utf-
 
 def remove_duplicates(lexicon: dict, case="") -> dict:
     """
-        2do: Currently not needed as apparently no duplicates are produced by the code.
+        fyi: Currently not needed as apparently no duplicates are produced by the code.
              However, we could need that one day.
         This method removes duplicates from a lexicon. Duplicates may occur when making keys uppercase.
 
@@ -762,7 +762,7 @@ def reduce_phone_set(lexicon: dict, mergePhones: dict) -> dict:
     """
         This function merges phones that are barely distinguished in (Austrian) German.
         Duplicate entries that occur will be removed immediately.
-        2do: it makes much more sense to do this minimisation before generation of PVs
+        beautify: it makes much more sense to do this minimisation before generation of PVs
     """
     lexiconNew = {};
     rekeks = rf"({'|'.join([str(phn) for phn in mergePhones.keys()])})"

@@ -20,7 +20,7 @@ class Pronunciation():
     def add(self, addThis, addAsGroupOfRules: Optional[bool]=False):
         """
         This method appends a set of rules, no matter whether that rule is already in there.
-        We need to append it anyway – 2do: further explanation follows.
+        We need to append it anyway.
         """
         # if addThis not in self.ruleList:
         if addAsGroupOfRules:
@@ -32,7 +32,7 @@ class Pronunciation():
     def replace(self, pron, replaceBy):
         """
         This method replaces a given variant (i.e. canonical pronunciation) with the variant defined by 'replaceBy'.
-        Should be used for final C 2 k and voiced 2 unvoiced s – 2do: further explanation follows.
+        Should be used for final C 2 k and voiced 2 unvoiced s.
         Be careful! Don't use this method for other rules.
         """
         # if addThis not in self.ruleList:
