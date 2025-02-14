@@ -1,6 +1,9 @@
 
 Tool for creating a pronunciation lexicon for Austrian German conversational speech. 
 
+## Installation
+Clone repository, change path `cd /path/to/pvlex/`, then `pip install .`.
+
 ## Usage 
 Create a wordlist with the words that you want to process (one word per line). Change the paths in the configuration file `config.json` and run `pvlex.py`. This creates pronunciation lexicons with multiple pronunciations per word. The pronunciation generation is based on phonetic and phonological rules. Note that a rule-based approach will always produce some unlikely variants as well. Creating Forced Alignments with your data will sort them out and trim your lexicon.
 
