@@ -15,7 +15,7 @@ Example wordlists can be found in `data/wordlists/`, an output lexicon in `data/
 
 ## How to cite 
 
-If you use our code or data in your research, please cite this repository:
+If you use our code or data in your research, please cite this repository. Use the "Cite this repository" option or:
 ```
 @misc{wepner2025pvlex
 	author  = {Wepner, Saskia},
