@@ -5,7 +5,7 @@ with open("Readme.md", "r", encoding="utf-8") as fd:
 
 setuptools.setup(
     name="pvlex",
-    version="0.0.1",
+    version="1.0",
     author="Saskia Wepner",
     author_email="wepner@tugraz.at",
     description="Create pronunciation lexicon with variants for Austrian German conversational speech.",
