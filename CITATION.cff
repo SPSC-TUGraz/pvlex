@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use our code or data in your research, please cite this repository:"
+authors:
+  - family-names: Wepner
+    given-names: Saskia
+    orcid: https://orcid.org/0000-0001-8232-1913
+title: "pvlex -- Lexicon with Pronunciation Variants for (Austrian) German Conversatinal Speech"
+version: 1.0
+date-released: 2025-01-11
+url: https://github.com/SPSC-TUGraz/pvlex
