@@ -9,7 +9,7 @@ Create a wordlist with the words that you want to process (one word per line). C
 
 Note: If you want to use your own version of a canonical pronunciation lexicon, you can set the `"RawGermanLexicon"` in the configuration file. Otherwise, you will need an internet connection for accessing the integrated online service to create canonical pronunciations (in this case, please cite [BAS Web Services Grapheme-to-phoneme-conversion tool](https://clarin.phonetik.uni-muenchen.de/BASWebServices/interface/Grapheme2Phoneme) as well). 
 
-If you want to create pronunciation variants with the typical reductions for standar German (as spoken in Germany), set the configuration `ConversationalAustrianGerman` to `false` in the section `GeneralSettings>ruleSets`. 
+If you want to create pronunciation variants with the typical reductions for standard German (as spoken in Germany), set the configuration `ConversationalAustrianGerman` to `false` in the section `GeneralSettings>ruleSets`. 
 
 Example wordlists can be found in `data/wordlists/`, an output lexicon in `data/lexiconLatest_lower.txt`. 
 
