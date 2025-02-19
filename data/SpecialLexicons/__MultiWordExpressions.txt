@@ -121,6 +121,10 @@ grinst_du	g r I n s ts
 habe_ich	h O . v I
 habe_ich_mir	h a b i m a
 habe_ich_mir	h a b @ m @
+haben_sie	h a m s
+haben_sie	h O m s
+haben_wir	h a m a
+haben_wir	h O m a
 habt_ihr	h a p ts
 habt_ihr	h O p ts
 habt_ihr_ja	h a p ts j a
@@ -181,6 +185,7 @@ machst_du	m O x s t
 macht_sie	m a x ts @
 magst_du_dich	m a k s t @
 merkst_du	m E6 k s t
+mit_dem	m I m
 müssten_wir	m i: a s a t n m a
 müssen_wir	m i: s m a
 müssten_wir	m i: s t m a
@@ -234,6 +239,7 @@ telefoniert_hast	t e l e f o n I6 t @ s ts
 telefoniert_hat	t e l e f o n I6 t @ t
 trainierst_du	t r E n i6 s ts
 tun_wir	t u: m a
+und_den U n t n
 über_die	y: b E6 ts
 übersiedelt_ihr	y: b E6 s i: d l ts E6
 von_dem	f O m
