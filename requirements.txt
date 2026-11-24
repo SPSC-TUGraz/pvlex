@@ -1,5 +1,5 @@
 json5>=0.9.10
 regex>=2022.7.9
-setuptools==83.0.0
+setuptools>=84.1.0
 pandas
 numpy
